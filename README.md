@@ -4,11 +4,11 @@ Plataforma de innovación ecológica y ciencia ciudadana para transformar el rec
 
 # Integrantes
 
-* [Anthonela Teran] – Líder
-* [Martin Pérez] – Desarrollador Backend / Blockchain
-* [Victoria Balastro] – Desarrollador Frontend
-* [Danna Velasco] – Investigador / Biotecnólogo
-* [Evelyn Cando] – Mentor / Asesor
+* Anthonela Terán – Líder
+* Martin Pérez – Desarrollador Backend / Blockchain
+* Victoria Balastro – Desarrollador Frontend
+* Danna Velasco – Investigador / Biotecnólogo
+* Evelyn Cando – Mentor / Asesor
 
 # Problema que se quiere resolver
 
