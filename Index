@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenBlock - Ecosistema de Biotecnología e IA</title>
+    <!-- Tailwind CSS para el diseño premium y responsivo -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        eco: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            400: '#4ade80',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                            950: '#052e16',
+                        },
+                        dark: {
+                            DEFAULT: '#0B130E',
+                            panel: '#122017',
+                            card: '#1B3024',
+                            border: '#2A4737',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome para iconos atractivos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts (Inter) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        @keyframes scan {
+            0% { top: 0%; opacity: 0.8; }
+            50% { top: 100%; opacity: 1; }
+            100% { top: 0%; opacity: 0.8; }
+        }
+        .laser-line {
+            animation: scan 3s infinite linear;
+        }
+        @keyframes pulse-glow {
+            0%, 100% { filter: drop-shadow(0 0 5px rgba(34, 197, 94, 0.5)); }
+            50% { filter: drop-shadow(0 0 15px rgba(34, 197, 94, 0.9)); }
+        }
+        .glow-mushroom {
+            animation: pulse-glow 3s infinite ease-in-out;
+        }
+        .glass-morphism {
+            background: rgba(27, 48, 36, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(42, 71, 55, 0.5);
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B130E;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1B3024;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #22c55e;
+        }
+    </style>
+</head>
+<body class="bg-dark text-gray-100 min-h-screen font-sans flex flex-col overflow-x-hidden">
+
+    <header class="bg-dark-panel border-b border-dark-border px-6 py-4 sticky top-0 z-50 shadow-md">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <div class="bg-eco-500 text-dark-panel p-2.5 rounded-xl font-bold text-2xl flex items-center justify-center shadow-lg shadow-eco-500/20">
+                    <i class="fa-solid fa-mushroom"></i>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-black tracking-tight text-white flex items-center gap-2">
+                        GREENBLOCK <span class="text-xs bg-eco-500/20 text-eco-400 font-bold px-2 py-0.5 rounded-full border border-eco-500/30">HACKATHON MVP v1.2</span>
+                    </h1>
+                    <p class="text-xs text-gray-400">Plataforma Inteligente de Reciclaje y Biotecnología Micólogica</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-3">
+                <span class="text-sm text-gray-300 font-medium">Visualización:</span>
+                <div class="inline-flex rounded-lg p-0.5 bg-dark border border-dark-border">
+                    <button onclick="toggleMobileView(false)" id="btn-desktop-split" class="px-3 py-1.5 text-xs font-semibold rounded-md bg-eco-600 text-white transition-all">
+                        <i class="fa-solid fa-columns mr-1"></i> Ecosistema Completo
+                    </button>
+                    <button onclick="toggleMobileView(true)" id="btn-mobile-only" class="px-3 py-1.5 text-xs font-semibold rounded-md text-gray-400 hover:text-white transition-all">
+                        <i class="fa-solid fa-mobile-screen mr-1"></i> Solo App Móvil
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl w-full mx-auto p-4 md:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        
+        <!-- PANEL IZQUIERDO: Pitch Deck, Canvas, Marco Científico y Encuestas (Ocultable en modo móvil exclusivo) -->
+        <section id="left-deck" class="lg:col-span-7 space-y-6 transition-all duration-300">
+            <!-- Selector de pestañas del Pitch Deck -->
+            <div class="bg-dark-panel rounded-2xl p-2 border border-dark-border flex flex-wrap gap-1 shadow-md">
+                <button onclick="switchDeckTab('canvas')" id="deck-btn-canvas" class="flex-1 min-w-[120px] px-3 py-2 text-sm font-bold rounded-xl bg-eco-500 text-dark-panel transition-all">
+                    <i class="fa-solid fa-cubes mr-1.5"></i> Canvas Negocios
+                </button>
+                <button onclick="switchDeckTab('biotech')" id="deck-btn-biotech" class="flex-1 min-w-[120px] px-3 py-2 text-sm font-bold rounded-xl text-gray-400 hover:text-gray-200 transition-all">
+                    <i class="fa-solid fa-flask mr-1.5"></i> Ciencia Hongo PUR
+                </button>
+                <button onclick="switchDeckTab('survey')" id="deck-btn-survey" class="flex-1 min-w-[120px] px-3 py-2 text-sm font-bold rounded-xl text-gray-400 hover:text-gray-200 transition-all">
+                    <i class="fa-solid fa-poll mr-1.5"></i> Validación Encuesta
+                </button>
+            </div>
+
+            <!-- CONTENIDO DE PESTAÑA: CANVAS DE NEGOCIOS -->
+            <div id="deck-content-canvas" class="space-y-4">
+                <div class="bg-dark-panel rounded-2xl border border-dark-border p-5 shadow-lg">
+                    <div class="flex justify-between items-center mb-4 border-b border-dark-border pb-3">
+                        <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                            <span class="text-eco-400"><i class="fa-solid fa-table-cells-large"></i></span> GreenBlock Model Canvas (9 Bloques)
+                        </h3>
+                        <span class="text-xs bg-eco-500/10 text-eco-400 border border-eco-500/30 px-2 py-1 rounded">Eje: Sostenibilidad e Innovación</span>
+                    </div>
+
+                    <!-- Cuadrícula interactiva del canvas de negocios -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                        
+                        <!-- 1. Problema Central -->
+                        <div class="bg-dark-card p-3.5 rounded-xl border border-red-900/30 hover:border-red-500/40 transition-all">
+                            <h4 class="font-bold text-red-400 uppercase flex items-center gap-1.5 mb-1.5">
+                                <span class="bg-red-500/15 text-red-400 w-5 h-5 rounded-full flex items-center justify-center font-black">1</span> 
+                                Problema Central
+                            </h4>
+                            <p class="text-gray-300 leading-relaxed">
+                                Se generan <strong>400M tons</strong> de plástico anuales. El poliuretano (PUR) de esponjas e industria es difícil de reciclar tradicionalmente, tardando siglos en degradarse y contaminando los ecosistemas terrestres y acuáticos.
+                            </p>
+                        </div>
+
+                        <!-- 2. Segmento Objetivo -->
+                        <div class="bg-dark-card p-3.5 rounded-xl border border-dark-border hover:border-eco-500/40 transition-all">
+                            <h4 class="font-bold text-eco-400 uppercase flex items-center gap-1.5 mb-1.5">
+                                <span class="bg-eco-500/15 text-eco-400 w-5 h-5 rounded-full flex items-center justify-center font-black">2</span> 
+                                Segmento Objetivo
+                            </h4>
+                            <p class="text-gray-300 leading-relaxed">
+                                Estudiantes y docentes de colegios y universidades que buscan educación STEM activa; familias, comunidades motivadas y empresas que requieren trazabilidad e informes ESG de su huella de plástico.
+                            </p>
+                        </div>
+
+                        <!-- 3. Propuesta de Valor -->
+                        <div class="bg-dark-card p-3.5 rounded-xl border border-amber-900/30 hover:border-amber-500/40 transition-all">
+                            <h4 class="font-bold text-amber-400 uppercase flex items-center gap-1.5 mb-1.5">
+                                <span class="bg-amber-500/15 text-amber-400 w-5 h-5 rounded-full flex items-center justify-center font-black">3</span> 
+                                Propuesta de Valor
+                            </h4>
+                            <p class="text-gray-300 leading-relaxed">
+                                <strong>GreenBlock</strong> transforma el reciclaje en una experiencia de biotecnología real. Unimos IA para escanear residuos, blockchain para certificar la trazabilidad y la gamificación para premiar acciones ecológicas.
+                            </p>
+                        </div>
+
+                        <!-- 4. Solución Técnica -->
+                        <div class="bg-dark-card p-3.5 rounded-xl border border-dark-border hover:border-eco-500/40 transition-all">
+                            <h4 class="font-bold text-eco-400 uppercase flex items-center gap-1.5 mb-1.5">
+                                <span class="bg-eco-500/15 text-eco-400 w-5 h-5 rounded-full flex items-center justify-center font-black">4</span> 
+                                Solución Técnica
+                            </h4>
+                            <p class="text-gray-300 leading-relaxed
