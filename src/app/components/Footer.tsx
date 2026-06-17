@@ -20,7 +20,7 @@ export function Footer() {
         </div>
         <div className="flex items-center gap-4">
           <a
-            href="https://github.com"
+            href="https://github.com/vivca22/GREENBLOCK"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-1 text-sm transition-opacity hover:opacity-70"

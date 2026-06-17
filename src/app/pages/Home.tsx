@@ -5,6 +5,9 @@ import {
   ClipboardList, Sprout, FlaskConical, ChevronRight, ArrowRight,
 } from "lucide-react";
 import { ImagePlaceholder } from "../components/ImagePlaceholder";
+import greenBlockLogo from "../../assets/images/brand/logo_w_plastic.png";
+import diagramFlow from "../../assets/images/diagrams/diagram_flow.jpeg";
+import mushroomGrowingImg from "../../assets/images/mushrooms/mushroom_growing.png";
 
 function SectionBadge({ text, color = "#D8F3DC", textColor = "#2D6A4F" }: { text: string; color?: string; textColor?: string }) {
   return (
@@ -59,23 +62,33 @@ export function Home() {
       <section className="w-full py-16 px-4" style={{ backgroundColor: "#D8F3DC" }}>
         <div className="max-w-6xl mx-auto flex flex-col items-center text-center gap-8">
           <div className="max-w-2xl">
+            <img
+              src={greenBlockLogo}
+              alt="Logo de GreenBlock"
+              className="mx-auto w-56 sm:w-72 md:w-160 h-auto mb-6 rounded-3xl shadow-lg"
+            />
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-5" style={{ backgroundColor: "#95D5B2" }}>
               <Leaf size={14} color="#1B4332" />
               <span style={{ color: "#1B4332", fontWeight: 700, fontSize: "0.8rem" }}>Plataforma de micorremediación</span>
             </div>
             <h1 style={{ fontFamily: "Nunito, sans-serif", fontWeight: 900, fontSize: "clamp(2rem, 5vw, 3rem)", color: "#1B4332", lineHeight: 1.15 }}>
-              Fungi que salvan el planeta
+              GreenBlock salva el planeta
             </h1>
             <p className="mt-4" style={{ color: "#2D6A4F", fontSize: "1.1rem", fontWeight: 600, lineHeight: 1.6 }}>
               Cada kit Green Block degrada plástico real y produce hongos comestibles.<br />
               Trazado en blockchain. Verificado por la ciencia.
             </p>
           </div>
-          <ImagePlaceholder
+          {/* <ImagePlaceholder
             label="AI image: oyster mushroom growing on colorful plastic"
             height="h-72"
             className="w-full max-w-2xl"
-          />
+          /> */}
+          <img
+              src={mushroomGrowingImg}
+              alt="Oyster mushroom growing on colorful plastic"
+              className="mx-auto w-56 sm:w-72 md:w-100 h-auto mb-6 rounded-3xl shadow-lg"
+            />
           <div className="flex flex-col sm:flex-row gap-4">
             <button
               onClick={() => navigate("/request")}
@@ -204,7 +217,12 @@ export function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <ImagePlaceholder label="AI image: diagram of fungi degrading plastic polymer chains" height="h-72" className="w-full" />
+            <img
+              src={diagramFlow}
+              alt="Oyster mushroom growing on colorful plastic"
+              className="mx-auto w-56 sm:w-72 md:w-100 h-auto mb-6 rounded-3xl shadow-lg"
+            />
+            {/* <ImagePlaceholder label="AI image: diagram of fungi degrading plastic polymer chains" height="h-72" className="w-full" /> */}
             <div className="flex flex-col gap-6">
               {howItWorks.map((step) => (
                 <div key={step.step} className="flex gap-4 items-start">
