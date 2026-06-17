@@ -5,10 +5,11 @@
  * - Connect to OpenRouter API - model: google/gemini-flash-1.5
  * - Trained with mycoremediation knowledge base
  */
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { useAuth } from "../context/AuthContext";
 import { Send, ChefHat, Leaf, Recycle, BookOpen } from "lucide-react";
+import { askGreenBot } from "../../lib/greenbot";
 
 const plasticTypes = [
   {
@@ -186,6 +187,12 @@ export function HowToUse() {
   const [selectedRecipe, setSelectedRecipe] = useState<typeof recipes[0] | null>(null);
   const [botMessages, setBotMessages] = useState<BotMessage[]>(initialBotMessages);
   const [botInput, setBotInput] = useState("");
+  const [botLoading, setBotLoading] = useState(false);
+  const botBottomRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    botBottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [botMessages, botLoading]);
   const [selectedPlastic, setSelectedPlastic] = useState<typeof plasticTypes[0] | null>(null);
 
   if (!user) {
@@ -209,13 +216,21 @@ export function HowToUse() {
     );
   }
 
-  const sendBotMessage = (text: string) => {
-    if (!text.trim()) return;
+  const sendBotMessage = async (text: string) => {
+    if (!text.trim() || botLoading) return;
     const userMsg: BotMessage = { id: Date.now(), from: "user", text };
-    const reply = botResponses[text] ?? "¡Buena pregunta! Nuestro GreenBot aprende cada día más sobre micorremediación y degradación de plásticos. ¡Conecta a la API de Gemini para respuestas personalizadas en tiempo real! 🌿";
-    const botMsg: BotMessage = { id: Date.now() + 1, from: "bot", text: reply };
-    setBotMessages((prev) => [...prev, userMsg, botMsg]);
+    setBotMessages((prev) => [...prev, userMsg]);
     setBotInput("");
+    setBotLoading(true);
+    try {
+      const reply = await askGreenBot(text, user.kitType);
+      setBotMessages((prev) => [...prev, { id: Date.now(), from: "bot", text: reply }]);
+    } catch {
+      const fallback = botResponses[text] ?? "Lo siento, tuve un problema al responder. Intenta de nuevo en un momento. 🌿";
+      setBotMessages((prev) => [...prev, { id: Date.now(), from: "bot", text: fallback }]);
+    } finally {
+      setBotLoading(false);
+    }
   };
 
   const tabs = [
@@ -490,7 +505,11 @@ export function HowToUse() {
             <div className="rounded-2xl overflow-hidden" style={{ border: "1px solid #E5E7EB", backgroundColor: "white" }}>
               <div className="p-4 flex flex-col gap-3 overflow-y-auto" style={{ minHeight: "320px", maxHeight: "480px" }}>
                 {botMessages.map((msg) => (
-                  <div key={msg.id} className={`flex ${msg.from === "user" ? "justify-end" : "justify-start"}`}>
+                  <div
+                    key={msg.id}
+                    className={`flex ${msg.from === "user" ? "justify-end" : "justify-start"}`}
+                    style={{ animation: "msgIn 0.18s ease-out both" }}
+                  >
                     {msg.from === "bot" && (
                       <div className="w-7 h-7 rounded-full flex items-center justify-center mr-2 flex-shrink-0 mt-0.5" style={{ backgroundColor: "#D8F3DC" }}>
                         <span style={{ fontSize: "0.8rem" }}>🌿</span>
@@ -510,6 +529,23 @@ export function HowToUse() {
                     </div>
                   </div>
                 ))}
+
+                {botLoading && (
+                  <div className="flex items-center gap-2" style={{ animation: "msgIn 0.18s ease-out both" }}>
+                    <div className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: "#D8F3DC" }}>
+                      <span style={{ fontSize: "0.8rem" }}>🌿</span>
+                    </div>
+                    <div className="px-4 py-3" style={{ backgroundColor: "#F3F4F6", borderRadius: "16px 16px 16px 4px" }}>
+                      <span className="flex gap-1 items-center h-4">
+                        <span className="w-1.5 h-1.5 rounded-full animate-bounce" style={{ backgroundColor: "#52B788", animationDelay: "0ms" }} />
+                        <span className="w-1.5 h-1.5 rounded-full animate-bounce" style={{ backgroundColor: "#52B788", animationDelay: "150ms" }} />
+                        <span className="w-1.5 h-1.5 rounded-full animate-bounce" style={{ backgroundColor: "#52B788", animationDelay: "300ms" }} />
+                      </span>
+                    </div>
+                  </div>
+                )}
+
+                <div ref={botBottomRef} />
               </div>
 
               <div className="px-4 pb-3 flex flex-wrap gap-2" style={{ borderTop: "1px solid #F3F4F6" }}>
@@ -536,8 +572,9 @@ export function HowToUse() {
                 />
                 <button
                   onClick={() => sendBotMessage(botInput)}
-                  className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
-                  style={{ backgroundColor: "#2D6A4F" }}
+                  disabled={botLoading}
+                  className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-opacity"
+                  style={{ backgroundColor: "#2D6A4F", opacity: botLoading ? 0.5 : 1 }}
                 >
                   <Send size={16} color="white" />
                 </button>

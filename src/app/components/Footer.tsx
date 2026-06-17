@@ -1,4 +1,4 @@
-import { Github, ExternalLink } from "lucide-react";
+import { Github, ExternalLink, Instagram } from "lucide-react";
 
 export function Footer() {
   return (
@@ -19,6 +19,16 @@ export function Footer() {
           </p>
         </div>
         <div className="flex items-center gap-4">
+          <a
+            href="https://www.instagram.com/greenblockec?igsh=YmpvOXJ5YjM0ZTVo&utm_source=qr"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1 text-sm transition-opacity hover:opacity-70"
+            style={{ color: "#95D5B2", fontFamily: "Nunito, sans-serif" }}
+          >
+            <Instagram size={16} />
+            Instagram
+          </a>
           <a
             href="https://github.com/vivca22/GREENBLOCK"
             target="_blank"

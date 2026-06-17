@@ -4,7 +4,7 @@ import {
   GraduationCap, ShoppingBag, Package, ChefHat, TrendingUp,
   ClipboardList, Sprout, FlaskConical, ChevronRight, ArrowRight,
   Microscope, Award, Star, Users, Beaker, TreePine, Medal, Sparkles,
-  CheckCircle2, Zap,
+  CheckCircle2, Zap, Instagram,
 } from "lucide-react";
 import { diagramFlow, greenBlockLogo, mushroomGrowingImg } from "../../assets";
 
@@ -614,6 +614,17 @@ export function Home() {
               Verificar un lote
             </BigButton>
           </div>
+
+          <a
+            href="https://www.instagram.com/greenblockec?igsh=YmpvOXJ5YjM0ZTVo&utm_source=qr"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 mt-6 px-5 py-2.5 rounded-full transition-opacity hover:opacity-80"
+            style={{ backgroundColor: "#1B4332", color: "#95D5B2", fontFamily: "Nunito, sans-serif", fontWeight: 700, fontSize: "0.9rem" }}
+          >
+            <Instagram size={16} />
+            Síguenos en Instagram @greenblockec
+          </a>
         </div>
       </section>
     </div>
