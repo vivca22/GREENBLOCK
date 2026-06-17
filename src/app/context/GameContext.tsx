@@ -1,11 +1,7 @@
-/*
- * CONNECTIONS NEEDED:
- * - Firebase: import { db } from '../lib/firebase'
- * - Firestore: users/{uid} + pointsLog collection
- * - awardPoints(uid, type, description, amount)
- * - spendPoints(uid, amount, itemKey)
- */
 import { createContext, useContext, useState, useEffect, useCallback, ReactNode } from "react";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { db } from "../../lib/firebase";
+import { useAuth } from "./AuthContext";
 
 export type SkinType = "default" | "blue" | "golden" | "rainbow";
 
@@ -69,7 +65,7 @@ const INITIAL_HISTORY: HistoryItem[] = [
 
 const STORAGE_KEY = "greenblock_game";
 
-function loadState() {
+function loadLocal() {
   try {
     const s = localStorage.getItem(STORAGE_KEY);
     if (s) return JSON.parse(s);
@@ -78,7 +74,10 @@ function loadState() {
 }
 
 export function GameProvider({ children }: { children: ReactNode }) {
-  const saved = loadState();
+  const { user } = useAuth();
+  const uid = user?.uid;
+
+  const saved = loadLocal();
   const [points, setPoints] = useState<number>(saved?.points ?? 270);
   const [skin, setSkinState] = useState<SkinType>(saved?.skin ?? "default");
   const [equippedItems, setEquippedItems] = useState<string[]>(saved?.equippedItems ?? []);
@@ -87,10 +86,36 @@ export function GameProvider({ children }: { children: ReactNode }) {
   const [photosSent] = useState<number>(2);
   const [referrals] = useState<number>(1);
   const [toast, setToast] = useState<ToastData | null>(null);
+  const [firestoreLoaded, setFirestoreLoaded] = useState(false);
 
+  // Load from Firestore when user logs in
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({ points, skin, equippedItems, completedLessons, history }));
-  }, [points, skin, equippedItems, completedLessons, history]);
+    if (!uid) {
+      setFirestoreLoaded(false);
+      return;
+    }
+    const docRef = doc(db, "gameData", uid);
+    getDoc(docRef).then((snap) => {
+      if (snap.exists()) {
+        const data = snap.data();
+        setPoints(data.points ?? 270);
+        setSkinState(data.skin ?? "default");
+        setEquippedItems(data.equippedItems ?? []);
+        setCompletedLessons(data.completedLessons ?? ["module-1"]);
+        setHistory(data.history ?? INITIAL_HISTORY);
+      }
+      setFirestoreLoaded(true);
+    }).catch(() => setFirestoreLoaded(true));
+  }, [uid]);
+
+  // Sync to localStorage and Firestore on state changes
+  useEffect(() => {
+    const state = { points, skin, equippedItems, completedLessons, history };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    if (uid && firestoreLoaded) {
+      setDoc(doc(db, "gameData", uid), state).catch(console.error);
+    }
+  }, [points, skin, equippedItems, completedLessons, history, uid, firestoreLoaded]);
 
   const addPoints = useCallback((amount: number, text: string, icon: string) => {
     setPoints((p) => p + amount);

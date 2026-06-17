@@ -12,140 +12,140 @@ import { Send, ChefHat, Leaf, Recycle, BookOpen } from "lucide-react";
 
 const plasticTypes = [
   {
-    code: 1, symbol: "PET", name: "Polyethylene Terephthalate",
+    code: 1, symbol: "PET", name: "Polietileno Tereftalato",
     color: "#DBEAFE", textColor: "#1D4ED8",
-    products: "Water bottles, soda bottles, food jars",
+    products: "Botellas de agua, botellas de refresco, frascos",
     compatible: true,
-    tip: "Look for the triangle with 1 on the bottom of the bottle — usually near the center of the base.",
-    instruction: "Clean the bottle, cut it into strips of ~2cm. Mix with the substrate in the kit box before inoculating. PET works very well with oyster mushrooms.",
+    tip: "Busca el triángulo con el número 1 en la parte inferior de la botella, generalmente en el centro de la base.",
+    instruction: "Limpia la botella y córtala en tiras de ~2cm. Mézclala con el sustrato del kit antes de inocular. El PET funciona muy bien con hongos ostra.",
   },
   {
-    code: 2, symbol: "HDPE", name: "High-Density Polyethylene",
+    code: 2, symbol: "HDPE", name: "Polietileno de Alta Densidad",
     color: "#D1FAE5", textColor: "#065F46",
-    products: "Milk jugs, detergent bottles, shampoo bottles",
+    products: "Bidones de leche, botellas de detergente, botellas de champú",
     compatible: true,
-    tip: "The triangle with 2 is typically recessed into the plastic at the bottom or back of the container.",
-    instruction: "Shred the plastic into small pieces (1–3cm). Sterilize briefly by boiling for 10 min. Add to your kit substrate. Works very well.",
+    tip: "El triángulo con 2 suele estar hundido en el plástico en la parte inferior o trasera del envase.",
+    instruction: "Tritura el plástico en trozos de 1–3cm. Esteriliza hirviéndolo 10 minutos y deja enfriar. Agrega al sustrato del kit. Funciona muy bien.",
   },
   {
-    code: 3, symbol: "PVC", name: "Polyvinyl Chloride",
+    code: 3, symbol: "PVC", name: "Policloruro de Vinilo",
     color: "#FEF3C7", textColor: "#92400E",
-    products: "Pipes, window frames, some food wrap",
+    products: "Tuberías, marcos de ventana, algunas envolturas de alimentos",
     compatible: false,
-    tip: "PVC is often unmarked or labeled with a V. Check the bottom of the container for the triangle with 3.",
-    instruction: "⚠️ Not recommended for home use. PVC releases chlorine compounds when broken down. Take this plastic to a professional recycling center.",
+    tip: "El PVC frecuentemente no está marcado o lleva una V. Busca el triángulo con el número 3 en la parte inferior del envase.",
+    instruction: "⚠️ No recomendado para uso doméstico. El PVC libera compuestos de cloro al degradarse. Lleva este plástico a un centro de reciclaje profesional.",
   },
   {
-    code: 4, symbol: "LDPE", name: "Low-Density Polyethylene",
+    code: 4, symbol: "LDPE", name: "Polietileno de Baja Densidad",
     color: "#D8F3DC", textColor: "#2D6A4F",
-    products: "Plastic bags, squeeze bottles, six-pack rings",
+    products: "Bolsas de plástico, botellas exprimibles, anillos de six-pack",
     compatible: true,
-    tip: "LDPE bags rarely show the code. Look for the triangle with 4 on the bottom of squeeze bottles.",
-    instruction: "Cut bags into small 2cm squares. Mix 20% LDPE with 80% substrate. Good colonization results after 3–4 weeks.",
+    tip: "Las bolsas de LDPE raramente muestran el código. Busca el triángulo con 4 en la parte inferior de botellas exprimibles.",
+    instruction: "Corta las bolsas en cuadrados de 2cm. Mezcla 20% de LDPE con 80% de sustrato. Buenos resultados de colonización en 3–4 semanas.",
   },
   {
-    code: 5, symbol: "PP", name: "Polypropylene",
+    code: 5, symbol: "PP", name: "Polipropileno",
     color: "#EDE9FE", textColor: "#5B21B6",
-    products: "Yogurt containers, ketchup bottles, bottle caps",
+    products: "Envases de yogur, botellas de ketchup, tapas de botellas",
     compatible: true,
-    tip: "Find the triangle with 5 pressed into the base or inside of the lid. May require a flashlight to see.",
-    instruction: "PP caps and small pieces work great. Grind if possible, or cut small. Mix into substrate. Excellent results with oyster mushrooms.",
+    tip: "Busca el triángulo con 5 en la base o dentro de la tapa. Puede requerir linterna para verlo.",
+    instruction: "Las tapas de PP y piezas pequeñas funcionan genial. Tritura si es posible o corta pequeño. Mezcla en el sustrato. Excelentes resultados con hongos ostra.",
   },
   {
-    code: 6, symbol: "PS", name: "Polystyrene",
+    code: 6, symbol: "PS", name: "Poliestireno",
     color: "#FEE2E2", textColor: "#991B1B",
-    products: "Styrofoam cups, plastic cutlery, CD cases",
+    products: "Vasos de poliestireno, cubiertos de plástico, cajas de CD",
     compatible: false,
-    tip: "Look for the triangle with 6 on disposable cups and foam packaging. May appear as PS without the number.",
-    instruction: "⚠️ Limited compatibility. Styrene byproducts may harm the mycelium. Only use under adult supervision and never in food-growing setups.",
+    tip: "Busca el triángulo con 6 en vasos desechables y empaques de espuma. Puede aparecer como PS sin número.",
+    instruction: "⚠️ Compatibilidad limitada. Los subproductos del estireno pueden dañar el micelio. Usar solo bajo supervisión adulta y nunca en cultivos de alimentos.",
   },
   {
-    code: 7, symbol: "Other", name: "Mixed / Other Plastics",
+    code: 7, symbol: "Otro", name: "Plásticos Mixtos / Otros",
     color: "#F3F4F6", textColor: "#374151",
-    products: "Large water bottles, DVDs, some food containers",
+    products: "Botellas grandes, DVDs, algunos envases de alimentos",
     compatible: null,
-    tip: "The triangle with 7 (or OTHER) means mixed. Results vary. Identify the exact plastic before using.",
-    instruction: "Results vary widely. Send a photo to GreenBot for an assessment before adding to your kit.",
+    tip: "El triángulo con 7 (u OTHER) significa mezcla. Los resultados varían. Identifica el plástico exacto antes de usar.",
+    instruction: "Los resultados varían mucho. Envía una foto a GreenBot para una evaluación antes de agregar al kit.",
   },
 ];
 
 const recipes = [
   {
-    category: "Growing",
+    category: "Cultivo",
     emoji: "🌱",
-    title: "PET Bottle Myco-Garden",
-    time: "3–4 weeks",
-    difficulty: "Easy",
+    title: "Micro-jardín de Botellas PET",
+    time: "3–4 semanas",
+    difficulty: "Fácil",
     steps: [
-      "Collect 5–6 clean PET (code 1) bottles and cut into 2cm strips.",
-      "Sterilize strips in boiling water for 10 minutes, then let cool.",
-      "Open your Green Block kit box and mix the PET strips evenly into the substrate (max 20% plastic).",
-      "Seal the bag and leave in a dark spot at 20–24°C.",
-      "Check daily — white mycelium should appear in 7–10 days.",
-      "Once fully colonized (white all over), open the bag and mist with water twice daily.",
-      "Harvest mushrooms when caps start to flatten. The plastic will be visibly degraded!",
+      "Recolecta 5–6 botellas PET (código 1) limpias y córtalas en tiras de 2cm.",
+      "Esteriliza las tiras en agua hirviendo 10 minutos y deja enfriar.",
+      "Abre tu kit Green Block y mezcla las tiras de PET uniformemente en el sustrato (máximo 20% de plástico).",
+      "Sella la bolsa y déjala en un lugar oscuro a 20–24°C.",
+      "Revisa diariamente — el micelio blanco debe aparecer en 7–10 días.",
+      "Una vez colonizado completamente (todo blanco), abre la bolsa y rocía con agua dos veces al día.",
+      "Cosecha los hongos cuando los sombreros empiecen a aplanarse. ¡El plástico estará visiblemente degradado!",
     ],
   },
   {
-    category: "Growing",
+    category: "Cultivo",
     emoji: "🍄",
-    title: "HDPE Cap Cluster Kit",
-    time: "2–3 weeks",
-    difficulty: "Easy",
+    title: "Kit de Racimo de Tapas HDPE",
+    time: "2–3 semanas",
+    difficulty: "Fácil",
     steps: [
-      "Collect 50+ HDPE (code 2) plastic caps of any color.",
-      "Wash thoroughly with soap and rinse well.",
-      "Arrange caps in a single layer on the substrate surface of your opened kit.",
-      "Mist daily and cover loosely with plastic wrap.",
-      "Mycelium will colonize caps from below within 5–7 days.",
-      "Keep misting. Mushrooms will pin through the cap gaps in week 2–3.",
+      "Recolecta 50+ tapas de plástico HDPE (código 2) de cualquier color.",
+      "Lava bien con jabón y enjuaga.",
+      "Coloca las tapas en una sola capa sobre la superficie del sustrato de tu kit abierto.",
+      "Rocía diariamente y cubre con film plástico sin apretar.",
+      "El micelio colonizará las tapas desde abajo en 5–7 días.",
+      "Sigue rociando. Los hongos pinearán entre las tapas en la semana 2–3.",
     ],
   },
   {
-    category: "Culinary",
+    category: "Culinario",
     emoji: "🍳",
-    title: "Sautéed Oyster Mushrooms with Garlic",
+    title: "Hongos Ostra Salteados con Ajo",
     time: "15 min",
-    difficulty: "Easy",
+    difficulty: "Fácil",
     steps: [
-      "Harvest fresh oyster mushrooms from your kit — 200g is ideal.",
-      "Tear into bite-sized pieces along the natural grain.",
-      "Heat 2 tbsp olive oil in a pan on medium-high.",
-      "Add 3 crushed garlic cloves, cook 1 minute.",
-      "Add mushrooms in a single layer. Don't stir for 2 minutes — let them brown.",
-      "Toss, add salt, pepper, a splash of soy sauce and fresh parsley.",
-      "Serve on toast or as a side dish. Delicious!",
+      "Cosecha hongos ostra frescos de tu kit — idealmente 200g.",
+      "Separa en trozos del tamaño de un bocado siguiendo la veta natural.",
+      "Calienta 2 cucharadas de aceite de oliva en una sartén a fuego medio-alto.",
+      "Agrega 3 dientes de ajo machacados y cocina 1 minuto.",
+      "Agrega los hongos en una sola capa. No revuelvas durante 2 minutos para que doren.",
+      "Voltea, agrega sal, pimienta, un chorrito de salsa de soja y perejil fresco.",
+      "Sirve sobre tostadas o como guarnición. ¡Delicioso!",
     ],
   },
   {
-    category: "Culinary",
+    category: "Culinario",
     emoji: "🥘",
-    title: "Mycelium Risotto",
+    title: "Risotto de Micelio",
     time: "35 min",
-    difficulty: "Medium",
+    difficulty: "Medio",
     steps: [
-      "Sauté 1 diced onion in butter until translucent.",
-      "Add 1 cup Arborio rice, stir 2 minutes.",
-      "Pour in ½ cup white wine, stir until absorbed.",
-      "Add warm vegetable broth ladle by ladle, stirring constantly (25 min).",
-      "In a separate pan, sauté 150g oyster mushrooms with thyme and garlic.",
-      "Fold mushrooms into risotto. Add parmesan, salt and pepper.",
-      "Serve immediately with fresh lemon zest on top.",
+      "Sofríe 1 cebolla picada en mantequilla hasta que quede transparente.",
+      "Agrega 1 taza de arroz Arborio, revuelve 2 minutos.",
+      "Vierte ½ taza de vino blanco y revuelve hasta que se absorba.",
+      "Agrega caldo de verduras caliente cucharón a cucharón, revolviendo constantemente (25 min).",
+      "En otra sartén, saltea 150g de hongos ostra con tomillo y ajo.",
+      "Incorpora los hongos al risotto. Agrega parmesano, sal y pimienta.",
+      "Sirve inmediatamente con ralladura de limón fresca encima.",
     ],
   },
   {
     category: "Eco DIY",
     emoji: "♻️",
-    title: "Myco-Compost Booster",
-    time: "6–8 weeks",
-    difficulty: "Medium",
+    title: "Acelerador de Compost Micelial",
+    time: "6–8 semanas",
+    difficulty: "Medio",
     steps: [
-      "After mushroom harvest, collect the spent substrate (white mycelium block).",
-      "Break it into small chunks and add to your compost pile.",
-      "The mycelium will continue breaking down organic matter and any remaining plastic.",
-      "Mix with kitchen scraps, leaves and cardboard every 2 weeks.",
-      "After 6–8 weeks you'll have rich mycelium-enriched compost.",
-      "Use in your garden — excellent for soil structure!",
+      "Después de cosechar, recoge el sustrato agotado (bloque blanco de micelio).",
+      "Divídelo en trozos pequeños y agrégalos a tu pila de compost.",
+      "El micelio continuará descomponiendo materia orgánica y cualquier plástico restante.",
+      "Mezcla con restos de cocina, hojas y cartón cada 2 semanas.",
+      "En 6–8 semanas tendrás un compost rico enriquecido con micelio.",
+      "Úsalo en tu jardín — ¡excelente para la estructura del suelo!",
     ],
   },
 ];
@@ -159,24 +159,24 @@ interface BotMessage {
 const initialBotMessages: BotMessage[] = [
   {
     id: 1, from: "bot",
-    text: "Hi! I'm GreenBot 🌿 I know everything about mycoremediation, using your Green Block kit, and cooking with your mushrooms. What would you like to know?",
+    text: "¡Hola! Soy GreenBot 🌿 Sé todo sobre micorremediación, cómo usar tu kit Green Block y cocinar con tus hongos. ¿Qué quieres saber?",
   },
 ];
 
 const botSuggestions = [
-  "What plastics work best?",
-  "How long until mushrooms grow?",
-  "Can I eat these mushrooms?",
-  "My mycelium isn't growing, help!",
-  "How much plastic can it degrade?",
+  "¿Qué plásticos funcionan mejor?",
+  "¿Cuánto tarda en crecer el hongo?",
+  "¿Puedo comer estos hongos?",
+  "¡Mi micelio no crece, ayuda!",
+  "¿Cuánto plástico puede degradar?",
 ];
 
 const botResponses: Record<string, string> = {
-  "What plastics work best?": "PET (code 1), HDPE (code 2), LDPE (code 4) and PP (code 5) all work great with oyster mushrooms. Avoid PVC (code 3) and be careful with PS (code 6). Always clean plastics before adding them to your kit! 🍄",
-  "How long until mushrooms grow?": "After inoculating your substrate, expect white mycelium in 7–14 days. Mushroom pins (tiny baby mushrooms) appear in 2–3 weeks, and you can harvest in 3–4 weeks. Keep humidity high and temperature between 18–24°C! 🌱",
-  "Can I eat these mushrooms?": "Yes! Oyster mushrooms grown on plastic substrate are safe to eat. The mycelium digests the plastic internally — the mushroom fruit bodies are perfectly clean and nutritious. Make sure to harvest before the caps curl upward. Enjoy your Myco Risotto! 🍳",
-  "My mycelium isn't growing, help!": "Check these: 1) Temperature — should be 18–24°C. 2) Humidity — mist the inside of the bag daily. 3) Too much light? Move to a darker spot. 4) Contamination — if you see green/black spots, that's mold — start over with a clean setup. Contact us if the problem persists! 💚",
-  "How much plastic can it degrade?": "A single 500g Green Block kit can degrade approximately 15–30% of the plastic mixed into the substrate over 4–6 weeks. The rest becomes more porous and brittle, making it easier to process. Over multiple cycles you can degrade significantly more! 🌍",
+  "¿Qué plásticos funcionan mejor?": "¡El PET (código 1), HDPE (código 2), LDPE (código 4) y PP (código 5) funcionan genial con hongos ostra! Evita el PVC (código 3) y ten cuidado con el PS (código 6). ¡Siempre limpia los plásticos antes de agregarlos a tu kit! 🍄",
+  "¿Cuánto tarda en crecer el hongo?": "Después de inocular el sustrato, espera micelio blanco en 7–14 días. Los pins (pequeños hongos bebé) aparecen en 2–3 semanas y puedes cosechar en 3–4 semanas. ¡Mantén la humedad alta y la temperatura entre 18–24°C! 🌱",
+  "¿Puedo comer estos hongos?": "¡Sí! Los hongos ostra cultivados en sustrato de plástico son seguros para comer. El micelio digiere el plástico internamente — los cuerpos fructíferos están perfectamente limpios y nutritivos. Cosecha antes de que los sombreros se curven hacia arriba. ¡Disfruta tu Risotto Micelial! 🍳",
+  "¡Mi micelio no crece, ayuda!": "Revisa estos puntos: 1) Temperatura — debe ser 18–24°C. 2) Humedad — rocía el interior de la bolsa diariamente. 3) ¿Demasiada luz? Muévelo a un lugar más oscuro. 4) Contaminación — si ves manchas verdes/negras, es moho — empieza de nuevo. ¡Contáctanos si el problema persiste! 💚",
+  "¿Cuánto plástico puede degradar?": "¡Un kit Green Block de 500g puede degradar aproximadamente el 15–30% del plástico mezclado en el sustrato en 4–6 semanas! El resto se vuelve más poroso y frágil, facilitando su procesamiento. ¡Con múltiples ciclos puedes degradar significativamente más! 🌍",
 };
 
 export function HowToUse() {
@@ -188,22 +188,21 @@ export function HowToUse() {
   const [botInput, setBotInput] = useState("");
   const [selectedPlastic, setSelectedPlastic] = useState<typeof plasticTypes[0] | null>(null);
 
-  // Redirect if not authenticated
   if (!user) {
     return (
       <div className="min-h-screen flex items-center justify-center px-4" style={{ backgroundColor: "#D8F3DC", fontFamily: "Nunito, sans-serif" }}>
         <div className="text-center max-w-sm">
           <div className="text-5xl mb-4">🔒</div>
-          <h2 style={{ fontWeight: 800, color: "#1B4332", fontSize: "1.4rem", marginBottom: "0.5rem" }}>Members Only</h2>
+          <h2 style={{ fontWeight: 800, color: "#1B4332", fontSize: "1.4rem", marginBottom: "0.5rem" }}>Solo para miembros</h2>
           <p className="mb-6 text-sm" style={{ color: "#4B5563" }}>
-            Register with your Green Block kit purchase to access your personalized guide and recipes.
+            Regístrate con tu kit Green Block para acceder a tu guía personalizada y recetas.
           </p>
           <button
             onClick={() => navigate("/register")}
             className="px-8 py-3 rounded-xl transition-opacity hover:opacity-80"
             style={{ backgroundColor: "#2D6A4F", color: "white", fontWeight: 700 }}
           >
-            Register Now →
+            Regístrate ahora →
           </button>
         </div>
       </div>
@@ -213,18 +212,17 @@ export function HowToUse() {
   const sendBotMessage = (text: string) => {
     if (!text.trim()) return;
     const userMsg: BotMessage = { id: Date.now(), from: "user", text };
-    // TODO: const reply = await askGreenBot(text, { kitType: user.kitType, context: "mycoremediation" })
-    const reply = botResponses[text] ?? "Great question! Our GreenBot is learning more every day about mycoremediation and plastic degradation. Connect to the Gemini API for live personalized answers! 🌿";
+    const reply = botResponses[text] ?? "¡Buena pregunta! Nuestro GreenBot aprende cada día más sobre micorremediación y degradación de plásticos. ¡Conecta a la API de Gemini para respuestas personalizadas en tiempo real! 🌿";
     const botMsg: BotMessage = { id: Date.now() + 1, from: "bot", text: reply };
     setBotMessages((prev) => [...prev, userMsg, botMsg]);
     setBotInput("");
   };
 
   const tabs = [
-    { key: "plastics" as const, icon: <Recycle size={16} />, label: "Plastic Types" },
-    { key: "instructions" as const, icon: <BookOpen size={16} />, label: "Instructions" },
-    { key: "recipes" as const, icon: <ChefHat size={16} />, label: "Recipes" },
-    { key: "bot" as const, icon: <Leaf size={16} />, label: "GreenBot AI" },
+    { key: "plastics" as const, icon: <Recycle size={16} />, label: "Tipos de Plástico" },
+    { key: "instructions" as const, icon: <BookOpen size={16} />, label: "Instrucciones" },
+    { key: "recipes" as const, icon: <ChefHat size={16} />, label: "Recetas" },
+    { key: "bot" as const, icon: <Leaf size={16} />, label: "GreenBot IA" },
   ];
 
   return (
@@ -233,14 +231,19 @@ export function HowToUse() {
       <div className="w-full py-10 px-4" style={{ backgroundColor: "#2D6A4F" }}>
         <div className="max-w-5xl mx-auto">
           <div className="flex items-center gap-3 mb-1">
-            <img src={user.photo} alt={user.name} className="w-10 h-10 rounded-full border-2 border-white" onError={(e) => { (e.target as HTMLImageElement).src = "https://ui-avatars.com/api/?name=" + encodeURIComponent(user.name) + "&background=52B788&color=fff"; }} />
-            <span className="text-sm" style={{ color: "#95D5B2", fontWeight: 600 }}>Welcome, {user.name.split(" ")[0]}!</span>
+            <img
+              src={user.photo}
+              alt={user.name}
+              className="w-10 h-10 rounded-full border-2 border-white"
+              onError={(e) => { (e.target as HTMLImageElement).src = "https://ui-avatars.com/api/?name=" + encodeURIComponent(user.name) + "&background=52B788&color=fff"; }}
+            />
+            <span className="text-sm" style={{ color: "#95D5B2", fontWeight: 600 }}>¡Hola, {user.name.split(" ")[0]}!</span>
           </div>
           <h1 style={{ fontFamily: "Nunito, sans-serif", fontWeight: 900, fontSize: "2rem", color: "white", lineHeight: 1.2 }}>
-            How to Use Your Green Block Kit 🍄
+            Cómo usar tu Kit Green Block 🍄
           </h1>
           <p className="mt-2 text-sm" style={{ color: "#95D5B2" }}>
-            {user.kitType} · Registered {user.purchaseDate ? new Date(user.purchaseDate).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }) : ""}
+            {user.kitType}{user.purchaseDate ? ` · Registrado el ${new Date(user.purchaseDate).toLocaleDateString("es-ES", { month: "long", day: "numeric", year: "numeric" })}` : ""}
           </p>
         </div>
       </div>
@@ -270,26 +273,25 @@ export function HowToUse() {
 
       <div className="max-w-5xl mx-auto px-4 py-8">
 
-        {/* PLASTIC TYPES SECTION */}
+        {/* TIPOS DE PLÁSTICO */}
         {activeSection === "plastics" && (
           <div>
             <div className="mb-6">
               <h2 style={{ fontWeight: 800, color: "#1B4332", fontSize: "1.4rem", marginBottom: "0.5rem" }}>
-                🔎 Find Your Plastic Type
+                🔎 Encuentra tu tipo de plástico
               </h2>
               <p className="text-sm" style={{ color: "#4B5563" }}>
-                Every plastic bottle or container has a recycling symbol — a triangle with a number from 1 to 7 — usually on the bottom. Tap a type to learn more.
+                Cada botella o envase de plástico tiene un símbolo de reciclaje — un triángulo con un número del 1 al 7 — generalmente en la parte inferior. Toca un tipo para saber más.
               </p>
             </div>
 
-            {/* How to find the icon */}
             <div className="p-5 rounded-2xl mb-6" style={{ backgroundColor: "#D8F3DC", border: "1px solid #95D5B2" }}>
-              <p style={{ fontWeight: 700, color: "#1B4332", marginBottom: "0.5rem" }}>📍 How to find the icon on your bottle:</p>
+              <p style={{ fontWeight: 700, color: "#1B4332", marginBottom: "0.5rem" }}>📍 Cómo encontrar el ícono en tu botella:</p>
               <ol className="text-sm flex flex-col gap-1" style={{ color: "#2D6A4F" }}>
-                <li><strong>1.</strong> Turn your bottle upside down and look at the base.</li>
-                <li><strong>2.</strong> You'll see a small triangle made of arrows with a number inside (1–7).</li>
-                <li><strong>3.</strong> The letters below the triangle are the plastic abbreviation (PET, HDPE, etc.).</li>
-                <li><strong>4.</strong> Match the number to the cards below for your specific instructions.</li>
+                <li><strong>1.</strong> Da vuelta la botella y mira la base.</li>
+                <li><strong>2.</strong> Verás un triángulo pequeño hecho de flechas con un número adentro (1–7).</li>
+                <li><strong>3.</strong> Las letras debajo del triángulo son la abreviación del plástico (PET, HDPE, etc.).</li>
+                <li><strong>4.</strong> Busca ese número en las tarjetas de abajo para ver tus instrucciones específicas.</li>
               </ol>
             </div>
 
@@ -305,7 +307,6 @@ export function HowToUse() {
                   }}
                 >
                   <div className="flex items-start justify-between mb-3">
-                    {/* Recycling triangle SVG */}
                     <div className="relative flex items-center justify-center w-12 h-12">
                       <svg viewBox="0 0 48 48" width="48" height="48">
                         <path d="M24 4 L44 40 L4 40 Z" fill="none" stroke={p.textColor} strokeWidth="3" strokeLinejoin="round"/>
@@ -321,7 +322,7 @@ export function HowToUse() {
                         fontWeight: 700,
                       }}
                     >
-                      {p.compatible === true ? "✓ Compatible" : p.compatible === false ? "✗ Avoid" : "? Varies"}
+                      {p.compatible === true ? "✓ Compatible" : p.compatible === false ? "✗ Evitar" : "? Varía"}
                     </span>
                   </div>
                   <p style={{ fontWeight: 800, color: p.textColor, fontSize: "1rem" }}>{p.symbol}</p>
@@ -331,19 +332,18 @@ export function HowToUse() {
               ))}
             </div>
 
-            {/* Selected plastic detail */}
             {selectedPlastic && (
               <div className="mt-6 p-6 rounded-2xl" style={{ backgroundColor: selectedPlastic.color, border: `2px solid ${selectedPlastic.textColor}` }}>
                 <h3 style={{ fontWeight: 800, color: selectedPlastic.textColor, fontSize: "1.1rem", marginBottom: "1rem" }}>
-                  Code {selectedPlastic.code} — {selectedPlastic.symbol}: {selectedPlastic.name}
+                  Código {selectedPlastic.code} — {selectedPlastic.symbol}: {selectedPlastic.name}
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <p className="text-sm mb-1" style={{ fontWeight: 700, color: selectedPlastic.textColor }}>📍 How to find the icon:</p>
+                    <p className="text-sm mb-1" style={{ fontWeight: 700, color: selectedPlastic.textColor }}>📍 Cómo encontrar el ícono:</p>
                     <p className="text-sm" style={{ color: selectedPlastic.textColor, opacity: 0.85 }}>{selectedPlastic.tip}</p>
                   </div>
                   <div>
-                    <p className="text-sm mb-1" style={{ fontWeight: 700, color: selectedPlastic.textColor }}>🍄 How to use with your kit:</p>
+                    <p className="text-sm mb-1" style={{ fontWeight: 700, color: selectedPlastic.textColor }}>🍄 Cómo usar con tu kit:</p>
                     <p className="text-sm" style={{ color: selectedPlastic.textColor, opacity: 0.85 }}>{selectedPlastic.instruction}</p>
                   </div>
                 </div>
@@ -352,25 +352,25 @@ export function HowToUse() {
           </div>
         )}
 
-        {/* INSTRUCTIONS SECTION */}
+        {/* INSTRUCCIONES */}
         {activeSection === "instructions" && (
           <div>
             <h2 style={{ fontWeight: 800, color: "#1B4332", fontSize: "1.4rem", marginBottom: "0.5rem" }}>
-              📋 Step-by-Step Instructions
+              📋 Instrucciones paso a paso
             </h2>
             <p className="text-sm mb-6" style={{ color: "#4B5563" }}>
-              Follow these steps to set up your {user.kitType} for plastic degradation.
+              Sigue estos pasos para configurar tu {user.kitType} para la degradación de plásticos.
             </p>
 
             {[
-              { num: "1", icon: "🧹", title: "Prepare your plastics", color: "#D8F3DC", desc: "Collect clean plastic bottles or containers. Remove labels and caps. Wash thoroughly with soap and warm water. Let dry completely." },
-              { num: "2", icon: "🔍", title: "Identify the plastic type", color: "#DBEAFE", desc: "Check the bottom of each container for the recycling triangle with a number (1–7). Use the Plastic Types tab to confirm compatibility. Only use codes 1, 2, 4, and 5." },
-              { num: "3", icon: "✂️", title: "Cut into small pieces", color: "#EDE9FE", desc: "Cut plastic into strips or pieces of 2–3cm max. Smaller pieces = faster degradation. For rigid plastics, ask an adult to help with scissors or a cutter." },
-              { num: "4", icon: "♨️", title: "Optional: Sterilize", color: "#FEF3C7", desc: "For HDPE and PP plastics, boil the pieces in water for 10 minutes, then let cool completely. This removes surface contaminants that could harm your mycelium." },
-              { num: "5", icon: "📦", title: "Mix with substrate", color: "#D8F3DC", desc: "Open your Green Block kit bag. Add plastic pieces (max 20% of total volume). Mix evenly throughout the substrate. Seal the bag leaving the filter patch exposed." },
-              { num: "6", icon: "🌡️", title: "Colonization phase", color: "#DBEAFE", desc: "Place the sealed bag in a dark spot at 18–24°C. Check daily. White fluffy mycelium should appear in 7–14 days. Do not open the bag during this phase." },
-              { num: "7", icon: "💧", title: "Fruiting phase", color: "#EDE9FE", desc: "Once 70%+ of the bag is white, cut 3–4 X-shapes in the bag. Mist with clean water 2–3 times daily. Keep humidity high. Mushrooms will pin within 5–7 days." },
-              { num: "8", icon: "🍄", title: "Harvest!", color: "#FEF3C7", desc: "When caps start to flatten and the edges wave slightly, grab the base and twist gently. Harvest the whole cluster at once. The plastic will be visibly degraded — grey and brittle!" },
+              { num: "1", icon: "🧹", title: "Prepara tus plásticos", color: "#D8F3DC", desc: "Recoge botellas o envases de plástico limpios. Retira etiquetas y tapas. Lava bien con jabón y agua tibia. Deja secar completamente." },
+              { num: "2", icon: "🔍", title: "Identifica el tipo de plástico", color: "#DBEAFE", desc: "Revisa la parte inferior de cada envase para ver el triángulo de reciclaje con número (1–7). Usa la pestaña Tipos de Plástico para confirmar compatibilidad. Solo usa los códigos 1, 2, 4 y 5." },
+              { num: "3", icon: "✂️", title: "Corta en trozos pequeños", color: "#EDE9FE", desc: "Corta el plástico en tiras o trozos de máximo 2–3cm. Trozos más pequeños = degradación más rápida. Para plásticos rígidos, pide ayuda a un adulto con tijeras o cutter." },
+              { num: "4", icon: "♨️", title: "Opcional: Esteriliza", color: "#FEF3C7", desc: "Para plásticos HDPE y PP, hierve las piezas en agua 10 minutos y deja enfriar completamente. Esto elimina contaminantes superficiales que podrían dañar tu micelio." },
+              { num: "5", icon: "📦", title: "Mezcla con el sustrato", color: "#D8F3DC", desc: "Abre la bolsa de tu kit Green Block. Agrega las piezas de plástico (máximo 20% del volumen total). Mezcla uniformemente en el sustrato. Sella la bolsa dejando el parche de filtro expuesto." },
+              { num: "6", icon: "🌡️", title: "Fase de colonización", color: "#DBEAFE", desc: "Coloca la bolsa sellada en un lugar oscuro a 18–24°C. Revisa diariamente. El micelio blanco y esponjoso debe aparecer en 7–14 días. No abras la bolsa durante esta fase." },
+              { num: "7", icon: "💧", title: "Fase de fructificación", color: "#EDE9FE", desc: "Una vez que el 70%+ de la bolsa esté blanca, haz 3–4 cortes en X en la bolsa. Rocía con agua limpia 2–3 veces al día. Mantén la humedad alta. Los hongos pinearán en 5–7 días." },
+              { num: "8", icon: "🍄", title: "¡Cosecha!", color: "#FEF3C7", desc: "Cuando los sombreros empiecen a aplanarse y los bordes ondeen ligeramente, agarra la base y gira suavemente. Cosecha todo el racimo a la vez. ¡El plástico estará visiblemente degradado, gris y frágil!" },
             ].map((step) => (
               <div key={step.num} className="flex gap-4 mb-4">
                 <div
@@ -381,7 +381,7 @@ export function HowToUse() {
                 </div>
                 <div className="flex-1 p-4 rounded-2xl" style={{ backgroundColor: "white", border: "1px solid #E5E7EB" }}>
                   <div className="flex items-center gap-2 mb-1">
-                    <span className="text-xs px-2 py-0.5 rounded-full" style={{ backgroundColor: "#D8F3DC", color: "#2D6A4F", fontWeight: 700 }}>Step {step.num}</span>
+                    <span className="text-xs px-2 py-0.5 rounded-full" style={{ backgroundColor: "#D8F3DC", color: "#2D6A4F", fontWeight: 700 }}>Paso {step.num}</span>
                     <p style={{ fontWeight: 700, color: "#1B4332" }}>{step.title}</p>
                   </div>
                   <p className="text-sm" style={{ color: "#4B5563", lineHeight: 1.6 }}>{step.desc}</p>
@@ -391,14 +391,14 @@ export function HowToUse() {
           </div>
         )}
 
-        {/* RECIPES SECTION */}
+        {/* RECETAS */}
         {activeSection === "recipes" && (
           <div>
             <h2 style={{ fontWeight: 800, color: "#1B4332", fontSize: "1.4rem", marginBottom: "0.5rem" }}>
-              🍳 Recipes & Projects
+              🍳 Recetas y Proyectos
             </h2>
             <p className="text-sm mb-6" style={{ color: "#4B5563" }}>
-              Growing projects, culinary recipes, and eco DIY ideas for your mushroom kit.
+              Proyectos de cultivo, recetas culinarias e ideas eco-DIY para tu kit de hongos.
             </p>
 
             {selectedRecipe ? (
@@ -408,7 +408,7 @@ export function HowToUse() {
                   className="mb-4 flex items-center gap-1 text-sm transition-opacity hover:opacity-70"
                   style={{ color: "#2D6A4F", fontWeight: 600 }}
                 >
-                  ← Back to recipes
+                  ← Volver a recetas
                 </button>
                 <div className="p-6 rounded-2xl" style={{ backgroundColor: "white", border: "1px solid #E5E7EB" }}>
                   <div className="flex items-center gap-3 mb-4">
@@ -441,10 +441,10 @@ export function HowToUse() {
               </div>
             ) : (
               <div>
-                {(["Growing", "Culinary", "Eco DIY"] as const).map((cat) => (
+                {(["Cultivo", "Culinario", "Eco DIY"] as const).map((cat) => (
                   <div key={cat} className="mb-8">
                     <h3 className="mb-3" style={{ fontWeight: 700, color: "#2D6A4F" }}>
-                      {cat === "Growing" ? "🌱 Growing Projects" : cat === "Culinary" ? "🍳 Culinary Recipes" : "♻️ Eco DIY Projects"}
+                      {cat === "Cultivo" ? "🌱 Proyectos de Cultivo" : cat === "Culinario" ? "🍳 Recetas Culinarias" : "♻️ Proyectos Eco DIY"}
                     </h3>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       {recipes.filter((r) => r.category === cat).map((recipe) => (
@@ -462,7 +462,7 @@ export function HowToUse() {
                                 <span className="text-xs" style={{ color: "#6B7280" }}>⏱ {recipe.time}</span>
                                 <span className="text-xs" style={{ color: "#6B7280" }}>📊 {recipe.difficulty}</span>
                               </div>
-                              <p className="text-xs mt-2" style={{ color: "#9CA3AF" }}>{recipe.steps.length} steps →</p>
+                              <p className="text-xs mt-2" style={{ color: "#9CA3AF" }}>{recipe.steps.length} pasos →</p>
                             </div>
                           </div>
                         </button>
@@ -475,20 +475,19 @@ export function HowToUse() {
           </div>
         )}
 
-        {/* GREENBOT AI SECTION */}
+        {/* GREENBOT IA */}
         {activeSection === "bot" && (
           <div>
             <div className="mb-4">
               <h2 style={{ fontWeight: 800, color: "#1B4332", fontSize: "1.4rem", marginBottom: "0.25rem" }}>
-                🌿 GreenBot AI Advisor
+                🌿 Asesor GreenBot IA
               </h2>
               <p className="text-sm" style={{ color: "#4B5563" }}>
-                Trained in mycoremediation, plastic science, and mushroom cultivation. Ask me anything!
+                Entrenado en micorremediación, ciencia del plástico y cultivo de hongos. ¡Pregúntame lo que quieras!
               </p>
             </div>
 
             <div className="rounded-2xl overflow-hidden" style={{ border: "1px solid #E5E7EB", backgroundColor: "white" }}>
-              {/* Chat area */}
               <div className="p-4 flex flex-col gap-3 overflow-y-auto" style={{ minHeight: "320px", maxHeight: "480px" }}>
                 {botMessages.map((msg) => (
                   <div key={msg.id} className={`flex ${msg.from === "user" ? "justify-end" : "justify-start"}`}>
@@ -513,7 +512,6 @@ export function HowToUse() {
                 ))}
               </div>
 
-              {/* Suggestion chips */}
               <div className="px-4 pb-3 flex flex-wrap gap-2" style={{ borderTop: "1px solid #F3F4F6" }}>
                 {botSuggestions.map((s) => (
                   <button
@@ -527,13 +525,12 @@ export function HowToUse() {
                 ))}
               </div>
 
-              {/* Input */}
               <div className="flex gap-2 px-4 py-3" style={{ borderTop: "1px solid #E5E7EB" }}>
                 <input
                   value={botInput}
                   onChange={(e) => setBotInput(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && sendBotMessage(botInput)}
-                  placeholder="Ask about plastics, growing, recipes..."
+                  placeholder="Pregunta sobre plásticos, cultivo, recetas..."
                   className="flex-1 px-4 py-2.5 rounded-xl text-sm outline-none"
                   style={{ backgroundColor: "#F3F4F6", fontFamily: "Nunito, sans-serif", color: "#374151" }}
                 />

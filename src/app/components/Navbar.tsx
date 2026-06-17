@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Leaf, BookOpen, ShoppingBag, Sprout, LayoutDashboard, LogIn, UserPlus } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import { useGame } from "../context/GameContext";
 import { GreenPointsBadge } from "./GreenPointsBadge";
+
+const ADMIN_EMAIL = "admin@ecofungi.com";
 
 export function Navbar() {
   const location = useLocation();
@@ -12,16 +14,16 @@ export function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const publicLinks = [
-    { to: "/trazabilidad", label: "Verificar" },
-    { to: "/request", label: "Pedir Kit" },
+    { to: "/trazabilidad", label: "Verificar", icon: null },
+    { to: "/request", label: "Pedir Kit", icon: null },
   ];
 
   const authLinks = user
     ? [
-        { to: "/mi-hongo", label: "🍄 Mi Hongo" },
-        { to: "/aprende", label: "📖 Aprende" },
-        { to: "/tienda", label: "🌿 Tienda" },
-        { to: "/como-usar", label: "Cómo usar" },
+        { to: "/mi-hongo", label: "Mi Hongo", icon: <Sprout size={14} /> },
+        { to: "/aprende", label: "Aprende", icon: <BookOpen size={14} /> },
+        { to: "/tienda", label: "Tienda", icon: <ShoppingBag size={14} /> },
+        { to: "/como-usar", label: "Cómo usar", icon: null },
       ]
     : [];
 
@@ -32,7 +34,7 @@ export function Navbar() {
       <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 flex-shrink-0">
-          <span className="text-xl">🌿</span>
+          <Leaf size={20} style={{ color: "#2D6A4F" }} />
           <span style={{ fontFamily: "Nunito, sans-serif", fontWeight: 800, color: "#2D6A4F", fontSize: "1.15rem" }}>
             Green Block
           </span>
@@ -44,7 +46,7 @@ export function Navbar() {
             <Link
               key={link.to}
               to={link.to}
-              className="px-3 py-1.5 rounded-xl text-sm transition-colors hover:opacity-80"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-sm transition-colors hover:opacity-80"
               style={{
                 fontFamily: "Nunito, sans-serif",
                 fontWeight: 600,
@@ -52,21 +54,26 @@ export function Navbar() {
                 backgroundColor: location.pathname === link.to ? "#D8F3DC" : "transparent",
               }}
             >
+              {link.icon}
               {link.label}
             </Link>
           ))}
-          <Link
-            to="/admin"
-            className="px-3 py-1.5 rounded-xl text-sm transition-colors hover:opacity-80"
-            style={{
-              fontFamily: "Nunito, sans-serif",
-              fontWeight: 600,
-              color: location.pathname === "/admin" ? "#2D6A4F" : "#9CA3AF",
-              backgroundColor: location.pathname === "/admin" ? "#D8F3DC" : "transparent",
-            }}
-          >
-            Admin
-          </Link>
+
+          {user?.email === ADMIN_EMAIL && (
+            <Link
+              to="/admin"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-sm transition-colors hover:opacity-80"
+              style={{
+                fontFamily: "Nunito, sans-serif",
+                fontWeight: 600,
+                color: location.pathname === "/admin" ? "#2D6A4F" : "#9CA3AF",
+                backgroundColor: location.pathname === "/admin" ? "#D8F3DC" : "transparent",
+              }}
+            >
+              <LayoutDashboard size={14} />
+              Admin
+            </Link>
+          )}
         </div>
 
         {/* Right side */}
@@ -81,22 +88,40 @@ export function Navbar() {
                     alt={user.name}
                     className="w-8 h-8 rounded-full border-2"
                     style={{ borderColor: "#52B788" }}
-                    onError={(e) => { (e.target as HTMLImageElement).src = "https://ui-avatars.com/api/?name=" + encodeURIComponent(user.name) + "&background=52B788&color=fff&size=32"; }}
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src =
+                        "https://ui-avatars.com/api/?name=" + encodeURIComponent(user.name) + "&background=52B788&color=fff&size=32";
+                    }}
                   />
                 </Link>
-                <button onClick={logout} className="text-xs px-2 py-1.5 rounded-xl transition-opacity hover:opacity-70" style={{ color: "#9CA3AF", fontFamily: "Nunito, sans-serif", fontWeight: 600 }}>
+                <button
+                  onClick={logout}
+                  className="text-xs px-2 py-1.5 rounded-xl transition-opacity hover:opacity-70"
+                  style={{ color: "#9CA3AF", fontFamily: "Nunito, sans-serif", fontWeight: 600 }}
+                >
                   Salir
                 </button>
               </div>
             </>
           ) : (
-            <Link
-              to="/register"
-              className="hidden md:block px-4 py-2 rounded-xl text-sm transition-opacity hover:opacity-80"
-              style={{ backgroundColor: "#2D6A4F", color: "white", fontFamily: "Nunito, sans-serif", fontWeight: 700 }}
-            >
-              Registrarse
-            </Link>
+            <div className="hidden md:flex items-center gap-2">
+              <Link
+                to="/login"
+                className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm transition-opacity hover:opacity-80"
+                style={{ color: "#2D6A4F", fontFamily: "Nunito, sans-serif", fontWeight: 700, border: "2px solid #2D6A4F" }}
+              >
+                <LogIn size={14} />
+                Iniciar sesión
+              </Link>
+              <Link
+                to="/register"
+                className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm transition-opacity hover:opacity-80"
+                style={{ backgroundColor: "#2D6A4F", color: "white", fontFamily: "Nunito, sans-serif", fontWeight: 700 }}
+              >
+                <UserPlus size={14} />
+                Registrarse
+              </Link>
+            </div>
           )}
 
           {/* Mobile hamburger */}
@@ -113,12 +138,12 @@ export function Navbar() {
       {/* Mobile menu */}
       {menuOpen && (
         <div className="md:hidden px-4 pb-4 flex flex-col gap-1" style={{ borderTop: "1px solid #F3F4F6" }}>
-          {[...allLinks, { to: "/admin", label: "Admin" }].map((link) => (
+          {allLinks.map((link) => (
             <Link
               key={link.to}
               to={link.to}
               onClick={() => setMenuOpen(false)}
-              className="px-4 py-3 rounded-xl text-sm"
+              className="flex items-center gap-2 px-4 py-3 rounded-xl text-sm"
               style={{
                 fontFamily: "Nunito, sans-serif",
                 fontWeight: 600,
@@ -126,17 +151,57 @@ export function Navbar() {
                 backgroundColor: location.pathname === link.to ? "#D8F3DC" : "transparent",
               }}
             >
+              {link.icon}
               {link.label}
             </Link>
           ))}
+
+          {user?.email === ADMIN_EMAIL && (
+            <Link
+              to="/admin"
+              onClick={() => setMenuOpen(false)}
+              className="flex items-center gap-2 px-4 py-3 rounded-xl text-sm"
+              style={{
+                fontFamily: "Nunito, sans-serif",
+                fontWeight: 600,
+                color: location.pathname === "/admin" ? "#2D6A4F" : "#374151",
+                backgroundColor: location.pathname === "/admin" ? "#D8F3DC" : "transparent",
+              }}
+            >
+              <LayoutDashboard size={14} />
+              Admin
+            </Link>
+          )}
+
           {user ? (
-            <button onClick={() => { logout(); setMenuOpen(false); }} className="px-4 py-2 rounded-xl text-sm text-left" style={{ color: "#DC2626", fontFamily: "Nunito, sans-serif", fontWeight: 600 }}>
+            <button
+              onClick={() => { logout(); setMenuOpen(false); }}
+              className="px-4 py-2 rounded-xl text-sm text-left"
+              style={{ color: "#DC2626", fontFamily: "Nunito, sans-serif", fontWeight: 600 }}
+            >
               Cerrar sesión
             </button>
           ) : (
-            <Link to="/register" onClick={() => setMenuOpen(false)} className="px-4 py-3 rounded-xl text-sm text-center" style={{ backgroundColor: "#2D6A4F", color: "white", fontFamily: "Nunito, sans-serif", fontWeight: 700 }}>
-              Registrarse
-            </Link>
+            <>
+              <Link
+                to="/login"
+                onClick={() => setMenuOpen(false)}
+                className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm"
+                style={{ border: "2px solid #2D6A4F", color: "#2D6A4F", fontFamily: "Nunito, sans-serif", fontWeight: 700 }}
+              >
+                <LogIn size={14} />
+                Iniciar sesión
+              </Link>
+              <Link
+                to="/register"
+                onClick={() => setMenuOpen(false)}
+                className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm"
+                style={{ backgroundColor: "#2D6A4F", color: "white", fontFamily: "Nunito, sans-serif", fontWeight: 700 }}
+              >
+                <UserPlus size={14} />
+                Registrarse
+              </Link>
+            </>
           )}
         </div>
       )}

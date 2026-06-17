@@ -6,9 +6,7 @@ import {
   Microscope, Award, Star, Users, Beaker, TreePine, Medal, Sparkles,
   CheckCircle2, Zap,
 } from "lucide-react";
-import greenBlockLogo from "../../assets/images/brand/logo_w_plastic.png";
-import diagramFlow from "../../assets/images/diagrams/diagram_flow.jpeg";
-import mushroomGrowingImg from "../../assets/images/mushrooms/mushroom_growing.png";
+import { diagramFlow, greenBlockLogo, mushroomGrowingImg } from "../../assets";
 
 // ─── WAVE DIVIDER ───────────────────────────────────────────────────────────
 function WaveDivider({ topColor, bottomColor, flip = false }: { topColor: string; bottomColor: string; flip?: boolean }) {

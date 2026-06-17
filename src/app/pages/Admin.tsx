@@ -7,10 +7,13 @@
  * - Firebase Auth: auth.currentUser
  */
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, Navigate } from "react-router";
 import { X, Plus, LogOut, Package, Settings } from "lucide-react";
 import { BatchCard } from "../components/BatchCard";
 import { LoadingSpinner } from "../components/LoadingSpinner";
+import { useAuth } from "../context/AuthContext";
+
+const ADMIN_EMAIL = "admin@ecofungi.com";
 
 type Status = "created" | "packed" | "shipped" | "delivered";
 
@@ -31,6 +34,11 @@ type ModalType = "create" | "register" | null;
 
 export function Admin() {
   const navigate = useNavigate();
+  const { user, loading } = useAuth();
+
+  if (loading) return <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: "#D8F3DC" }}><LoadingSpinner /></div>;
+  if (!user || user.email !== ADMIN_EMAIL) return <Navigate to="/login" replace />;
+
   const [batches, setBatches] = useState<Batch[]>(mockBatches);
   const [modal, setModal] = useState<ModalType>(null);
   const [selectedBatch, setSelectedBatch] = useState<Batch | null>(null);
