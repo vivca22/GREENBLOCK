@@ -163,10 +163,10 @@ export function Home() {
         }}
       >
         {/* Decorative blobs */}
-        <div style={{ position: "absolute", top: 20, left: -60, width: 220, height: 220, borderRadius: "50%", background: "radial-gradient(circle, #95D5B244 0%, transparent 70%)", pointerEvents: "none" }} />
-        <div style={{ position: "absolute", top: 40, right: -40, width: 180, height: 180, borderRadius: "50%", background: "radial-gradient(circle, #52B78844 0%, transparent 70%)", pointerEvents: "none" }} />
+        <div style={{ position: "absolute", top: 20, left: -60, width: 220, height: 220, borderRadius: "50%", background: "radial-gradient(circle, #95D5B244 0%, transparent 70%)", pointerEvents: "none", zIndex: 0 }} />
+        <div style={{ position: "absolute", top: 40, right: -40, width: 180, height: 180, borderRadius: "50%", background: "radial-gradient(circle, #52B78844 0%, transparent 70%)", pointerEvents: "none", zIndex: 0 }} />
 
-        <div className="max-w-6xl mx-auto flex flex-col items-center text-center gap-6">
+        <div className="max-w-6xl mx-auto flex flex-col items-center text-center gap-6 relative" style={{ zIndex: 10 }}>
           <div style={{ position: "relative", display: "inline-block" }}>
             <img
               src={greenBlockLogo}
@@ -269,10 +269,10 @@ export function Home() {
       <WaveDivider topColor="white" bottomColor="#F0FDF4" />
 
       {/* ─── LAB ESCOLAR ──────────────────────────────────────────────────── */}
-      <section className="w-full py-16 px-4" style={{ backgroundColor: "#F0FDF4", position: "relative" }}>
-        <div style={{ position: "absolute", top: 0, right: 0, width: 300, height: 300, borderRadius: "50%", background: "radial-gradient(circle, #D8F3DC 0%, transparent 70%)", pointerEvents: "none" }} />
+      <section className="w-full py-16 px-4" style={{ backgroundColor: "#F0FDF4", position: "relative", overflow: "hidden" }}>
+        <div style={{ position: "absolute", top: 0, right: 0, width: 300, height: 300, borderRadius: "50%", background: "radial-gradient(circle, #D8F3DC 0%, transparent 70%)", pointerEvents: "none", zIndex: 0 }} />
 
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-6xl mx-auto relative" style={{ zIndex: 10 }}>
           <div className="text-center mb-12">
             <SectionBadge text="Laboratorio escolar" color="#AAFF5E55" textColor="#1B4332" icon={Microscope} />
             <h2
@@ -284,10 +284,10 @@ export function Home() {
                 backgroundClip: "text",
               }}
             >
-              El laboratorio ya esta en nuestra escuela
+              El laboratorio ya está en nuestra escuela
             </h2>
             <p className="mt-3 max-w-xl mx-auto" style={{ color: "#2D6A4F", fontSize: "1.05rem", fontWeight: 600, lineHeight: 1.65 }}>
-              No es un sueño: tenemos un laboratorio de cultivo de hongos funcionando dentro de la escuela donde los estudiantes aprenden micorremediacion de verdad.
+              No es un sueño: tenemos un laboratorio de cultivo de hongos funcionando dentro de la escuela donde los estudiantes aprenden micorremediación de verdad.
             </p>
           </div>
 
@@ -332,10 +332,10 @@ export function Home() {
           <div className="text-center mb-10">
             <SectionBadge text="Acceso gratuito" color="#FEF3C7" textColor="#92400E" icon={Star} />
             <h2 style={{ fontFamily: "Nunito, sans-serif", fontWeight: 900, color: "#1B4332", fontSize: "clamp(1.6rem, 4vw, 2.2rem)", lineHeight: 1.2, marginBottom: "0.75rem" }}>
-              Registrate y desbloquea todo
+              Regístrate y desbloquea todo
             </h2>
             <p className="max-w-lg mx-auto text-sm" style={{ color: "#6B7280", lineHeight: 1.65 }}>
-              Crear una cuenta es gratis y toma menos de 1 minuto con Google. Accede a tu guia personalizada, al asistente IA y al sistema de puntos.
+              Crear una cuenta es gratis y toma menos de 1 minuto con Google. Accede a tu guía personalizada, al asistente IA y al sistema de puntos.
             </p>
           </div>
 
@@ -367,17 +367,17 @@ export function Home() {
       <WaveDivider topColor="#F8F4EF" bottomColor="#1B4332" />
 
       {/* ─── PURCHASE BENEFITS ────────────────────────────────────────────── */}
-      <section className="w-full py-16 px-4" style={{ backgroundColor: "#1B4332", position: "relative" }}>
-        <div style={{ position: "absolute", bottom: 0, left: 0, width: 250, height: 250, borderRadius: "50%", background: "radial-gradient(circle, #2D6A4F 0%, transparent 70%)", pointerEvents: "none" }} />
+      <section className="w-full py-16 px-4" style={{ backgroundColor: "#1B4332", position: "relative", overflow: "hidden" }}>
+        <div style={{ position: "absolute", bottom: 0, left: 0, width: 250, height: 250, borderRadius: "50%", background: "radial-gradient(circle, #2D6A4F 0%, transparent 70%)", pointerEvents: "none", zIndex: 0 }} />
 
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-6xl mx-auto relative" style={{ zIndex: 10 }}>
           <div className="text-center mb-10">
             <SectionBadge text="Con tu kit" color="#2D6A4F" textColor="#95D5B2" icon={Package} />
             <h2 style={{ fontFamily: "Nunito, sans-serif", fontWeight: 900, color: "white", fontSize: "clamp(1.6rem, 4vw, 2.2rem)", lineHeight: 1.2, marginBottom: "0.75rem" }}>
               Lo que obtienes cuando compras
             </h2>
             <p className="max-w-lg mx-auto text-sm" style={{ color: "#95D5B2", lineHeight: 1.65 }}>
-              Cada pedido incluye mucho mas que un kit de hongos. Es una experiencia completa de ciencia, tecnologia y gastronomia.
+              Cada pedido incluye mucho más que un kit de hongos. Es una experiencia completa de ciencia, tecnología y gastronomía.
             </p>
           </div>
 
@@ -420,7 +420,7 @@ export function Home() {
               onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; }}
             >
               <Package size={18} />
-              Ver catalogo de kits
+              Ver catálogo de kits
               <ArrowRight size={18} />
             </button>
           </div>
@@ -443,14 +443,14 @@ export function Home() {
                 backgroundClip: "text",
               }}
             >
-              La ciencia de la micorremediacion
+              La ciencia de la micorremediación
             </h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <img
               src={diagramFlow}
-              alt="Diagrama del proceso de micorremediacion"
+              alt="Diagrama del proceso de micorremediación"
               className="h-auto rounded-3xl mx-auto"
               style={{
                 width: "min(420px, 90vw)",
@@ -490,11 +490,11 @@ export function Home() {
 
       <WaveDivider topColor="white" bottomColor="#FFF7ED" />
 
-      {/* ─── CERTIFICACION AMBIENTAL ──────────────────────────────────────── */}
-      <section className="w-full py-16 px-4" style={{ backgroundColor: "#FFF7ED", position: "relative" }}>
-        <div style={{ position: "absolute", top: 20, right: -60, width: 280, height: 280, borderRadius: "50%", background: "radial-gradient(circle, #FDE68A44 0%, transparent 70%)", pointerEvents: "none" }} />
+      {/* ─── CERTIFICACIÓN AMBIENTAL ──────────────────────────────────────── */}
+      <section className="w-full py-16 px-4" style={{ backgroundColor: "#FFF7ED", position: "relative", overflow: "hidden" }}>
+        <div style={{ position: "absolute", top: 20, right: -60, width: 280, height: 280, borderRadius: "50%", background: "radial-gradient(circle, #FDE68A44 0%, transparent 70%)", pointerEvents: "none", zIndex: 0 }} />
 
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-6xl mx-auto relative" style={{ zIndex: 10 }}>
           <div className="text-center mb-12">
             <SectionBadge text="Logro oficial" color="#FEF3C7" textColor="#92400E" icon={Award} />
             <h2
@@ -506,10 +506,10 @@ export function Home() {
                 backgroundClip: "text",
               }}
             >
-              Certificacion Ambiental Escolar
+              Certificación Ambiental Escolar
             </h2>
             <p className="mt-3 max-w-xl mx-auto" style={{ color: "#78350F", fontSize: "1.05rem", fontWeight: 600, lineHeight: 1.65 }}>
-              Gracias al laboratorio y al programa GreenBlock, nuestra escuela obtuvo la certificacion ambiental que reconoce nuestro compromiso real con el planeta.
+              Gracias al laboratorio y al programa GreenBlock, nuestra escuela obtuvo la certificación ambiental que reconoce nuestro compromiso real con el planeta.
             </p>
           </div>
 
@@ -570,7 +570,7 @@ export function Home() {
               >
                 <TreePine size={28} color="#95D5B2" />
                 <p style={{ color: "white", fontWeight: 800, fontSize: "0.95rem", lineHeight: 1.5 }}>
-                  La certificacion convierte a nuestra escuela en un referente de educacion ambiental en la region.
+                  La certificación convierte a nuestra escuela en un referente de educación ambiental en la región.
                 </p>
               </div>
             </div>
@@ -583,18 +583,18 @@ export function Home() {
       {/* ─── CTA FINAL ────────────────────────────────────────────────────── */}
       <section
         className="w-full py-16 px-4"
-        style={{ background: "linear-gradient(160deg, #D8F3DC 0%, #B7E4C7 100%)", position: "relative" }}
+        style={{ background: "linear-gradient(160deg, #D8F3DC 0%, #B7E4C7 100%)", position: "relative", overflow: "hidden" }}
       >
-        <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: 500, height: 300, borderRadius: "50%", background: "radial-gradient(circle, #95D5B244 0%, transparent 70%)", pointerEvents: "none" }} />
+        <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: 500, height: 300, borderRadius: "50%", background: "radial-gradient(circle, #95D5B244 0%, transparent 70%)", pointerEvents: "none", zIndex: 0 }} />
 
-        <div className="max-w-2xl mx-auto text-center relative">
+        <div className="max-w-2xl mx-auto text-center relative" style={{ zIndex: 10 }}>
           <div
             className="inline-flex items-center gap-2 mb-5 px-5 py-2.5 rounded-full"
             style={{ backgroundColor: "#1B4332", border: "3px solid #52B788", boxShadow: "0 4px 0 #1B433244" }}
           >
             <Sparkles size={16} color="#95D5B2" />
             <span style={{ color: "#95D5B2", fontWeight: 800, fontSize: "0.85rem", letterSpacing: "0.06em", textTransform: "uppercase" }}>
-              Unete al movimiento
+              Únete al movimiento
             </span>
           </div>
 
@@ -602,7 +602,7 @@ export function Home() {
             Empieza hoy y salva el planeta
           </h2>
           <p className="mb-8 text-base" style={{ color: "#2D6A4F", lineHeight: 1.65, fontWeight: 600 }}>
-            Registrate gratis, pide tu kit y unete a la red de estudiantes que ya estan degradando plastico con hongos.
+            Regístrate gratis, pide tu kit y únete a la red de estudiantes que ya están degradando plástico con hongos.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <BigButton onClick={() => navigate("/register")}>

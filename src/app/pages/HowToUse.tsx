@@ -99,7 +99,7 @@ const recipes = [
       "Coloca las tapas en una sola capa sobre la superficie del sustrato de tu kit abierto.",
       "Rocía diariamente y cubre con film plástico sin apretar.",
       "El micelio colonizará las tapas desde abajo en 5–7 días.",
-      "Sigue rociando. Los hongos pinearán entre las tapas en la semana 2–3.",
+      "Sigue rociando. Los hongos brotarán entre las tapas en la semana 2–3.",
     ],
   },
   {
@@ -380,7 +380,7 @@ export function HowToUse() {
             {[
               { num: "1", icon: "🧹", title: "Prepara tus plásticos", color: "#D8F3DC", desc: "Recoge botellas o envases de plástico limpios. Retira etiquetas y tapas. Lava bien con jabón y agua tibia. Deja secar completamente." },
               { num: "2", icon: "🔍", title: "Identifica el tipo de plástico", color: "#DBEAFE", desc: "Revisa la parte inferior de cada envase para ver el triángulo de reciclaje con número (1–7). Usa la pestaña Tipos de Plástico para confirmar compatibilidad. Solo usa los códigos 1, 2, 4 y 5." },
-              { num: "3", icon: "✂️", title: "Corta en trozos pequeños", color: "#EDE9FE", desc: "Corta el plástico en tiras o trozos de máximo 2–3cm. Trozos más pequeños = degradación más rápida. Para plásticos rígidos, pide ayuda a un adulto con tijeras o cutter." },
+              { num: "3", icon: "✂️", title: "Corta en trozos pequeños", color: "#EDE9FE", desc: "Corta el plástico en tiras o trozos de máximo 2–3cm. Trozos más pequeños = degradación más rápida. Para plásticos rígidos, pide ayuda a un adulto con tijeras o cúter." },
               { num: "4", icon: "♨️", title: "Opcional: Esteriliza", color: "#FEF3C7", desc: "Para plásticos HDPE y PP, hierve las piezas en agua 10 minutos y deja enfriar completamente. Esto elimina contaminantes superficiales que podrían dañar tu micelio." },
               { num: "5", icon: "📦", title: "Mezcla con el sustrato", color: "#D8F3DC", desc: "Abre la bolsa de tu kit Green Block. Agrega las piezas de plástico (máximo 20% del volumen total). Mezcla uniformemente en el sustrato. Sella la bolsa dejando el parche de filtro expuesto." },
               { num: "6", icon: "🌡️", title: "Fase de colonización", color: "#DBEAFE", desc: "Coloca la bolsa sellada en un lugar oscuro a 18–24°C. Revisa diariamente. El micelio blanco y esponjoso debe aparecer en 7–14 días. No abras la bolsa durante esta fase." },

@@ -108,7 +108,7 @@ export function Tienda() {
         <div className="max-w-5xl mx-auto flex items-center justify-between flex-wrap gap-4">
           <div>
             <h1 style={{ fontWeight: 900, color: "#1B4332", fontSize: "1.6rem" }}>🌿 Tienda Green Points</h1>
-            <p className="text-sm mt-1" style={{ color: "#6B7280" }}>Canjea tus puntos por items, skins y descuentos reales</p>
+            <p className="text-sm mt-1" style={{ color: "#6B7280" }}>Canjea tus puntos por ítems, skins y descuentos reales</p>
           </div>
           <GreenPointsBadge points={points} size="lg" />
         </div>

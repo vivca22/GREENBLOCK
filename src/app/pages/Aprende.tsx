@@ -122,7 +122,7 @@ const MODULES = [
         title: "Condiciones ideales",
         content: [
           "Para un crecimiento óptimo, mantén tu kit en un lugar con temperatura estable entre 18–24°C. Evita corrientes de aire frío o calor directo. La luz indirecta es perfecta — no es necesaria la luz solar directa, pero tampoco la oscuridad total.",
-          "La humedad es crucial. Durante la fase de colonización (bag cerrada), el substrate ya contiene suficiente humedad. Durante la fructificación, rocía el interior de la apertura con agua limpia 2–3 veces al día. El objetivo es mantener las superficies ligeramente húmedas.",
+          "La humedad es crucial. Durante la fase de colonización (bag cerrada), el sustrato ya contiene suficiente humedad. Durante la fructificación, rocía el interior de la apertura con agua limpia 2–3 veces al día. El objetivo es mantener las superficies ligeramente húmedas.",
         ],
         videoPlaceholder: "Video: Setup ideal del kit en casa",
       },
