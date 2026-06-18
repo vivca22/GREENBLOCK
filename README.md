@@ -1,75 +1,158 @@
 # GREENBLOCK
 
-Plataforma de innovación ecológica y ciencia ciudadana para transformar el reciclaje de plástico mediante Inteligencia Artificial, Blockchain y Biotecnología micológica en escuelas y comunidades.
+<p align="center">
+  <img src="docs/assets/logo_1.png" alt="Logo de GREENBLOCK" width="180">
+</p>
 
-# Integrantes
+<p align="center">
+  <strong>Plataforma de ciencia ciudadana que transforma el reciclaje escolar en aprendizaje, trazabilidad e impacto medible mediante Inteligencia Artificial, Blockchain y micorremediación.</strong><br>
+  Cada residuo puede convertirse en ciencia, evidencia y acción climática.
+</p>
 
-* Anthonela Terán – Líder
-* Martin Pérez – Desarrollador Backend / Blockchain
-* Victoria Balastro – Desarrollador Frontend
-* Danna Velasco – Investigador / Biotecnólogo
-* Evelyn Cando – Mentor / Asesor
+---
 
-# Problema que se quiere resolver
+## Integrantes
 
-Cada año se generan más de 400 millones de toneladas de plástico en el mundo. La falta de incentivos reales y de sistemas tecnológicos accesibles provoca que **menos del 10% del plástico mundial se recicle correctamente**. 
+| Integrante | Rol |
+|---|---|
+| Anthonela Terán | Líder del proyecto |
+| Martin Pérez | Desarrollo Backend y Blockchain |
+| Victoria Balastro | Desarrollo Frontend |
+| Danna Velasco | Investigación y Biotecnología |
+| Evelyn Cando | Mentora y asesora |
 
-Gran parte de estos residuos termina contaminando ríos y océanos, generando elevados costos ambientales y económicos asociados a la limpieza, la destrucción de ecosistemas y problemas de salud pública. Además, los programas de reciclaje tradicionales sufren de opacidad, falta de trazabilidad y desinterés generalizado por parte de la ciudadanía y las instituciones educativas.
+---
 
-# Solución propuesta y cómo funciona
+## Problema Que Se Quiere Resolver
 
-**GreenBlock** soluciona de raíz la crisis del reciclaje y la opacidad de datos al unificar bits, bloques y biología en una sola plataforma interactiva que transforma las aulas escolares en laboratorios de innovación sostenible. 
+La contaminación por plástico continúa creciendo mientras una parte reducida de estos residuos se recicla correctamente. En escuelas y comunidades, el problema no es solamente separar materiales: también faltan herramientas para identificar los tipos de plástico, mantener la participación y verificar qué ocurrió con cada residuo.
 
-El sistema opera bajo tres pilares fundamentales:
-1. **Educación y Clasificación con IA:** Los estudiantes escanean los residuos plásticos utilizando la cámara de su dispositivo. La IA identifica el tipo de polímero y actúa como tutor científico guiando el proceso.
-2. **Destrucción Física con Biotecnología:** Aquellos plásticos difíciles de reciclar mecánicamente son depositados en contenedores controlados con hongos biodegradadores (*Pleurotus ostreatus*), los cuales rompen los enlaces del plástico mediante enzimas naturales.
-3. **Confianza e Incentivos con Blockchain:** Los datos de impacto ambiental se registran de forma inmutable. Mediante contratos inteligentes, se automatiza un sistema de incentivos económicos digitales (**Recycle-to-Earn**) para premiar el esfuerzo de los estudiantes y la comunidad.
+Los programas tradicionales suelen producir poca evidencia comparable. Esto dificulta medir el aprendizaje, reconocer la participación de los estudiantes y comunicar resultados ambientales confiables.
 
-# ODS al que se vincula
+## Solución Propuesta
 
-### ODS 4 – Educación de Calidad
-Transforma las aulas en espacios de ciencia ciudadana práctica, promoviendo el conocimiento técnico y biotecnológico en jóvenes.
+**GREENBLOCK** es una plataforma educativa que integra Inteligencia Artificial, trazabilidad Blockchain, gamificación y experimentación guiada con micorremediación.
 
-### ODS 12 – Producción y Consumo Responsables
-Reduce drásticamente los residuos plásticos a través de un reciclaje inteligente, trazable y apoyado por la participación activa de la comunidad.
+La plataforma ayuda a los estudiantes a identificar residuos, aprender cómo tratarlos responsablemente, registrar lotes, seguir su trazabilidad y obtener **Green Points** por completar actividades verificables.
 
-### ODS 13 – Acción por el Clima
-Disminuye la contaminación por plásticos, reduce la incineración de residuos y fomenta prácticas ecológicas medibles.
+> La micorremediación se plantea como una experiencia educativa controlada. No todos los plásticos son compatibles y cualquier cultivo debe seguir protocolos de bioseguridad y supervisión adulta.
 
-# Tecnologías que se usarán
+## Cómo Funciona
 
-## Frontend
-* React.js / React Native (Mobile)
-* Tailwind CSS
+| Paso | Proceso |
+|---|---|
+| 1 | El estudiante identifica el residuo y consulta su tipo de plástico. |
+| 2 | **GreenBot IA** explica compatibilidad, preparación y buenas prácticas. |
+| 3 | El residuo se asocia con un kit o lote experimental supervisado. |
+| 4 | La plataforma registra hitos, evidencia y hashes de trazabilidad. |
+| 5 | El estudiante completa actividades y obtiene **Green Points**. |
+| 6 | La institución consulta métricas de aprendizaje e impacto. |
 
-## Backend
-* Node.js / Express
-* Firebase (Autenticación y base de datos rápida)
+## ODS Vinculados
 
-## Inteligencia Artificial
-* Visión Artificial (Computer Vision) para reconocimiento de polímeros
-* Procesamiento de Lenguaje Natural (NLP) para el tutor científico interactivo
+| ODS | Nombre | Aplicación En GREENBLOCK |
+|---|---|---|
+| ODS 4 | Educación de Calidad | Convierte el aula en un espacio de ciencia ciudadana y aprendizaje STEM. |
+| ODS 12 | Producción y Consumo Responsables | Promueve clasificación responsable, trazabilidad y medición de residuos. |
+| ODS 13 | Acción por el Clima | Facilita acciones ambientales locales respaldadas por datos verificables. |
 
-## Biotecnología
-* Monitoreo IoT de cultivos controlados del hongo *Pleurotus ostreatus* (Temperatura / Humedad)
+## Tecnologías
 
-## Blockchain
-* Smart Contracts para el registro inmutable de impacto ambiental
-* Tokenomics / Cripto-activos para el sistema *Recycle-to-Earn*
+| Categoría | Tecnología |
+|---|---|
+| Frontend | React, Vite y Tailwind CSS |
+| Componentes UI | Radix UI, Material UI y Lucide React |
+| Datos del MVP | Contextos de React y datos demostrativos |
+| Backend preparado | Node.js, Express o Firebase |
+| Inteligencia Artificial | GreenBot educativo y arquitectura para visión artificial |
+| Blockchain | Pasaporte digital de lotes y registro de hashes verificables |
+| Biotecnología | Micorremediación experimental con *Pleurotus ostreatus* |
+| Hosting previsto | Vercel, Netlify o GitHub Pages |
+| Control de versiones | GitHub |
 
-## Diseño
-* Figma (Prototipado UI/UX)
+## Funcionalidades Principales
 
-## Control de versiones y Hosting
-* GitHub
-* Vercel / Netlify
+| Módulo | Descripción |
+|---|---|
+| Portal Público | Presenta el problema, la solución y la propuesta científica de GREENBLOCK. |
+| Registro y Acceso | Flujo de autenticación demostrativo para estudiantes y administradores. |
+| Solicitud de Kit | Catálogo y formulario para solicitar kits educativos. |
+| Guía De Plásticos | Información sobre tipos de plástico, compatibilidad y preparación. |
+| GreenBot IA | Asistente interactivo para dudas de reciclaje y micorremediación. |
+| Mi Hongo | Seguimiento gamificado del proceso experimental. |
+| Trazabilidad | Consulta de lotes, estados y hashes asociados con Blockchain. |
+| Green Points | Sistema de puntos, progreso y recompensas educativas. |
+| Tienda | Canje demostrativo de puntos por recompensas. |
+| Panel Administrador | Gestión y visualización del estado general de la plataforma. |
 
-# Funcionalidades Principales
+## Arquitectura De La Plataforma
 
-* **Eco-Scanner IA:** Reconocimiento instantáneo del tipo de plástico mediante la cámara.
-* **Tutor Científico:** Interfaz educativa guiada por inteligencia artificial.
-* **Monitoreo Micológico (Bio-Degradación):** Dashboard en tiempo real para observar cómo los hongos degradan los polímeros.
-* **Wallet GreenBlock:** Billetera digital donde los estudiantes acumulan sus recompensas ecológicas.
-* **Módulo Recycle-to-Earn:** Sistema automatizado de misiones de reciclaje y asignación de tokens.
-* **Pasaporte Digital del Residuo:** Trazabilidad inmutable basada en Blockchain para evitar el fraude de datos ambientales.
-* **Tienda de Recompensas Escolares:** Canje de tokens por materiales escolares, créditos académicos o beneficios comunitarios.
+El MVP organiza la experiencia en una interfaz React con módulos de aprendizaje, kits, trazabilidad y recompensas. La arquitectura prevista conecta estos módulos con autenticación, base de datos, servicios de IA y un contrato de trazabilidad.
+
+<p align="center">
+  <img src="docs/diagramas/DIAGRAMA%201.png" alt="Arquitectura de GREENBLOCK" width="760">
+</p>
+
+## Impacto Esperado
+
+- Mejorar el conocimiento sobre clasificación y consumo responsable.
+- Medir gramos o kilogramos de plástico clasificado por curso y escuela.
+- Registrar el porcentaje de lotes con evidencia completa.
+- Evaluar aprendizaje mediante módulos y cuestionarios.
+- Fortalecer proyectos escolares vinculados con IA, Blockchain y biotecnología.
+- Generar reportes de impacto sin exponer información sensible de estudiantes.
+
+## Seguridad Y Uso Responsable
+
+- No almacenar claves de API, contraseñas ni tokens en el repositorio.
+- Mantener datos personales fuera de la Blockchain.
+- Usar la IA como apoyo educativo y permitir validación humana.
+- Limitar los experimentos a materiales y protocolos autorizados.
+- No presentar resultados experimentales como evidencia científica concluyente sin validación.
+
+---
+
+## Entregable 3
+
+### MVP Web
+
+La publicación pública está pendiente. El código fuente del MVP se encuentra en [`src/`](src/).
+
+### Video Demo
+
+Pendiente de grabación y publicación en YouTube, Loom o Google Drive.
+
+### Pitch Deck
+
+[Ver Pitch Deck GREENBLOCK](docs/pitch.pdf)
+
+### Whitepaper
+
+[Ver Whitepaper GREENBLOCK v1.0](docs/whitepaper_v1.pdf)
+
+### Infografía
+
+<p align="center">
+  <img src="docs/infografia.png" alt="Infografía GREENBLOCK" width="760">
+</p>
+
+### Investigación Y Documentación
+
+- [Investigación de mercado](docs/investigacion/INVESTIGACI%C3%93N%20DE%20MERCADO.pdf)
+- [Justificación de los ODS](docs/proyecto/JUSTIFICACI%C3%93N%20DE%20LOS%20ODS.pdf)
+- [Roadmap inicial](docs/proyecto/roadmap_pdfsemana1_GREENBLOCK.pdf)
+- [Material compartido del equipo en Drive](https://drive.google.com/drive/folders/1k4n_X-pdk2eGmemlzyJPLZfWxwc9F1rJ?usp=sharing)
+
+## Ejecución Local
+
+```bash
+npm install
+npm run dev
+```
+
+Para generar la versión de producción:
+
+```bash
+npm run build
+```
+
