@@ -120,7 +120,7 @@ La publicación pública está pendiente. El código fuente del MVP se encuentra
 
 ### Video Demo
 
-Pendiente de grabación y publicación en YouTube, Loom o Google Drive.
+[Ver Video Demo GREENBLOCK en Instagram](https://www.instagram.com/reel/DZsWd8bOglM/?igsh=MTRvcHdkaXdrdDh0dw==)
 
 ### Pitch Deck
 
@@ -155,4 +155,3 @@ Para generar la versión de producción:
 ```bash
 npm run build
 ```
-
