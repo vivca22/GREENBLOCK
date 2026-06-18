@@ -1,15 +1,17 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router";
-import { Menu, X, Leaf, BookOpen, ShoppingBag, Sprout, LayoutDashboard, LogIn, UserPlus } from "lucide-react";
+import { Menu, X, BookOpen, ShoppingBag, Sprout, LayoutDashboard, LogIn, UserPlus } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import { useGame } from "../context/GameContext";
 import { GreenPointsBadge } from "./GreenPointsBadge";
+import { Skeleton } from "./ui/skeleton";
+import { greenBlockLogoBrowser } from "../../assets";
 
 const ADMIN_EMAIL = "admin@ecofungi.com";
 
 export function Navbar() {
   const location = useLocation();
-  const { user, logout } = useAuth();
+  const { user, logout, loading } = useAuth();
   const { points } = useGame();
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -34,7 +36,11 @@ export function Navbar() {
       <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 flex-shrink-0">
-          <Leaf size={20} style={{ color: "#2D6A4F" }} />
+          <img
+            src={greenBlockLogoBrowser}
+            alt="Green Block"
+            className="h-8 w-auto"
+          />
           <span style={{ fontFamily: "Nunito, sans-serif", fontWeight: 800, color: "#2D6A4F", fontSize: "1.15rem" }}>
             Green Block
           </span>
@@ -78,7 +84,14 @@ export function Navbar() {
 
         {/* Right side */}
         <div className="flex items-center gap-2">
-          {user ? (
+          {loading ? (
+            // Loading skeleton
+            <div className="hidden md:flex items-center gap-3">
+              <Skeleton className="h-6 w-24 rounded-lg" />
+              <Skeleton className="h-8 w-8 rounded-full" />
+              <Skeleton className="h-8 w-16 rounded-lg" />
+            </div>
+          ) : user ? (
             <>
               <GreenPointsBadge points={points} size="sm" />
               <div className="hidden md:flex items-center gap-2">
@@ -138,69 +151,81 @@ export function Navbar() {
       {/* Mobile menu */}
       {menuOpen && (
         <div className="md:hidden px-4 pb-4 flex flex-col gap-1" style={{ borderTop: "1px solid #F3F4F6" }}>
-          {allLinks.map((link) => (
-            <Link
-              key={link.to}
-              to={link.to}
-              onClick={() => setMenuOpen(false)}
-              className="flex items-center gap-2 px-4 py-3 rounded-xl text-sm"
-              style={{
-                fontFamily: "Nunito, sans-serif",
-                fontWeight: 600,
-                color: location.pathname === link.to ? "#2D6A4F" : "#374151",
-                backgroundColor: location.pathname === link.to ? "#D8F3DC" : "transparent",
-              }}
-            >
-              {link.icon}
-              {link.label}
-            </Link>
-          ))}
-
-          {user?.email === ADMIN_EMAIL && (
-            <Link
-              to="/admin"
-              onClick={() => setMenuOpen(false)}
-              className="flex items-center gap-2 px-4 py-3 rounded-xl text-sm"
-              style={{
-                fontFamily: "Nunito, sans-serif",
-                fontWeight: 600,
-                color: location.pathname === "/admin" ? "#2D6A4F" : "#374151",
-                backgroundColor: location.pathname === "/admin" ? "#D8F3DC" : "transparent",
-              }}
-            >
-              <LayoutDashboard size={14} />
-              Admin
-            </Link>
-          )}
-
-          {user ? (
-            <button
-              onClick={() => { logout(); setMenuOpen(false); }}
-              className="px-4 py-2 rounded-xl text-sm text-left"
-              style={{ color: "#DC2626", fontFamily: "Nunito, sans-serif", fontWeight: 600 }}
-            >
-              Cerrar sesión
-            </button>
+          {loading ? (
+            // Loading skeleton for mobile
+            <div className="flex flex-col gap-2 py-2">
+              <Skeleton className="h-10 w-full rounded-lg" />
+              <Skeleton className="h-10 w-full rounded-lg" />
+              <Skeleton className="h-10 w-full rounded-lg" />
+              <Skeleton className="h-10 w-full rounded-lg" />
+            </div>
           ) : (
             <>
-              <Link
-                to="/login"
-                onClick={() => setMenuOpen(false)}
-                className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm"
-                style={{ border: "2px solid #2D6A4F", color: "#2D6A4F", fontFamily: "Nunito, sans-serif", fontWeight: 700 }}
-              >
-                <LogIn size={14} />
-                Iniciar sesión
-              </Link>
-              <Link
-                to="/register"
-                onClick={() => setMenuOpen(false)}
-                className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm"
-                style={{ backgroundColor: "#2D6A4F", color: "white", fontFamily: "Nunito, sans-serif", fontWeight: 700 }}
-              >
-                <UserPlus size={14} />
-                Registrarse
-              </Link>
+              {allLinks.map((link) => (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  onClick={() => setMenuOpen(false)}
+                  className="flex items-center gap-2 px-4 py-3 rounded-xl text-sm"
+                  style={{
+                    fontFamily: "Nunito, sans-serif",
+                    fontWeight: 600,
+                    color: location.pathname === link.to ? "#2D6A4F" : "#374151",
+                    backgroundColor: location.pathname === link.to ? "#D8F3DC" : "transparent",
+                  }}
+                >
+                  {link.icon}
+                  {link.label}
+                </Link>
+              ))}
+
+              {user?.email === ADMIN_EMAIL && (
+                <Link
+                  to="/admin"
+                  onClick={() => setMenuOpen(false)}
+                  className="flex items-center gap-2 px-4 py-3 rounded-xl text-sm"
+                  style={{
+                    fontFamily: "Nunito, sans-serif",
+                    fontWeight: 600,
+                    color: location.pathname === "/admin" ? "#2D6A4F" : "#374151",
+                    backgroundColor: location.pathname === "/admin" ? "#D8F3DC" : "transparent",
+                  }}
+                >
+                  <LayoutDashboard size={14} />
+                  Admin
+                </Link>
+              )}
+
+              {user ? (
+                <button
+                  onClick={() => { logout(); setMenuOpen(false); }}
+                  className="px-4 py-2 rounded-xl text-sm text-left"
+                  style={{ color: "#DC2626", fontFamily: "Nunito, sans-serif", fontWeight: 600 }}
+                >
+                  Cerrar sesión
+                </button>
+              ) : (
+                <>
+                  <Link
+                    to="/login"
+                    onClick={() => setMenuOpen(false)}
+                    className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm"
+                    style={{ border: "2px solid #2D6A4F", color: "#2D6A4F", fontFamily: "Nunito, sans-serif", fontWeight: 700 }}
+                  >
+                    <LogIn size={14} />
+                    Iniciar sesión
+                  </Link>
+                  <Link
+                    to="/register"
+                    onClick={() => setMenuOpen(false)}
+                    className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm"
+                    style={{ backgroundColor: "#2D6A4F", color: "white", fontFamily: "Nunito, sans-serif", fontWeight: 700 }}
+                  >
+                    <UserPlus size={14} />
+                    Registrarse
+                  </Link>
+                </>
+              )}
             </>
           )}
         </div>

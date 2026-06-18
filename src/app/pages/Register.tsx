@@ -1,12 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router";
 import { useAuth } from "../context/AuthContext";
 
 export function Register() {
   const navigate = useNavigate();
-  const { loginWithGoogle, saveUserProfile } = useAuth();
+  const { user, loginWithGoogle, saveUserProfile } = useAuth();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    if (user) {
+      navigate("/mi-hongo");
+    }
+  }, [user, navigate]);
 
   const handleGoogleSignIn = async () => {
     setLoading(true);

@@ -1,4 +1,6 @@
 import { useNavigate } from "react-router";
+import { useRef, useEffect } from "react";
+import { useAuth } from "../context/AuthContext";
 import {
   Recycle, Leaf, ShieldCheck, UserPlus, BookOpen, Bot, Trophy,
   GraduationCap, ShoppingBag, Package, ChefHat, TrendingUp,
@@ -6,7 +8,49 @@ import {
   Microscope, Award, Star, Users, Beaker, TreePine, Medal, Sparkles,
   CheckCircle2, Zap, Instagram,
 } from "lucide-react";
-import { diagramFlow, greenBlockLogo, mushroomGrowingImg } from "../../assets";
+import { diagramFlow, greenBlockLogo, mushroomGrowingImg, labGreenBlockVideo } from "../../assets";
+
+// ─── VIDEO AUTOPLAY ON SCROLL ───────────────────────────────────────────────────────
+function VideoAutoplay({ src }: { src: string }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (videoRef.current) {
+          if (entry.isIntersecting) {
+            videoRef.current.play();
+          } else {
+            videoRef.current.pause();
+          }
+        }
+      },
+      { threshold: 0.7 }
+    );
+
+    if (videoRef.current) {
+      observer.observe(videoRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <video
+      ref={videoRef}
+      src={src}
+      muted
+      loop
+      playsInline
+      className="w-full h-auto rounded-3xl"
+      style={{
+        boxShadow: "0 8px 0 #95D5B2, 0 16px 40px rgba(27,67,50,0.12)",
+        border: "4px solid #B7E4C7",
+        maxWidth: "100%",
+      }}
+    />
+  );
+}
 
 // ─── WAVE DIVIDER ───────────────────────────────────────────────────────────
 function WaveDivider({ topColor, bottomColor, flip = false }: { topColor: string; bottomColor: string; flip?: boolean }) {
@@ -150,6 +194,25 @@ const certBenefits = [
 
 export function Home() {
   const navigate = useNavigate();
+  const { user } = useAuth();
+
+  useEffect(() => {
+    // Preload critical images and video for faster perceived performance
+    const preloadAssets = () => {
+      [greenBlockLogo, mushroomGrowingImg, diagramFlow, labGreenBlockVideo].forEach((asset) => {
+        if (asset.endsWith(".mp4")) {
+          const video = document.createElement("video");
+          video.src = asset;
+          video.preload = "auto";
+        } else {
+          const img = new Image();
+          img.src = asset;
+        }
+      });
+    };
+
+    preloadAssets();
+  }, []);
 
   return (
     <div style={{ fontFamily: "Nunito, sans-serif", overflowX: "hidden" }}>
@@ -224,11 +287,11 @@ export function Home() {
           />
 
           <div className="flex flex-col sm:flex-row gap-4 pb-4">
-            <BigButton onClick={() => navigate("/request")}>
+            {/* <BigButton onClick={() => navigate("/request")}>
               <Package size={18} />
               Pedir un kit
               <ArrowRight size={18} />
-            </BigButton>
+            </BigButton> */}
             <BigButton variant="outline" onClick={() => document.getElementById("como-funciona")?.scrollIntoView({ behavior: "smooth" })}>
               Cómo funciona
               <ChevronRight size={18} />
@@ -321,6 +384,11 @@ export function Home() {
               </ClayCard>
             ))}
           </div>
+
+          {/* Lab Video */}
+          <div className="mt-14">
+            <VideoAutoplay src={labGreenBlockVideo} />
+          </div>
         </div>
       </section>
 
@@ -356,10 +424,12 @@ export function Home() {
           </div>
 
           <div className="text-center">
-            <BigButton onClick={() => navigate("/register")}>
-              <UserPlus size={18} />
-              Crear cuenta gratis
-            </BigButton>
+            {!user && (
+              <BigButton onClick={() => navigate("/register")}>
+                <UserPlus size={18} />
+                Crear cuenta gratis
+              </BigButton>
+            )}
           </div>
         </div>
       </section>
@@ -605,10 +675,12 @@ export function Home() {
             Regístrate gratis, pide tu kit y únete a la red de estudiantes que ya están degradando plástico con hongos.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <BigButton onClick={() => navigate("/register")}>
-              <UserPlus size={18} />
-              Registrarse gratis
-            </BigButton>
+            {!user && (
+              <BigButton onClick={() => navigate("/register")}>
+                <UserPlus size={18} />
+                Registrarse gratis
+              </BigButton>
+            )}
             <BigButton variant="outline" onClick={() => navigate("/trazabilidad")}>
               <ShieldCheck size={18} />
               Verificar un lote

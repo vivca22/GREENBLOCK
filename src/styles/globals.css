@@ -1,0 +1,51 @@
+/* Fade-in animation for page load */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+#root {
+  animation: fadeIn 0.3s ease-in;
+}
+
+/* Image lazy loading with fade */
+img {
+  transition: opacity 0.3s ease-in;
+}
+
+img[loading="lazy"] {
+  opacity: 0.8;
+}
+
+img[loading="lazy"]:not([src*="data:"]) {
+  opacity: 1;
+}
+
+/* Video lazy loading */
+video {
+  transition: opacity 0.3s ease-in;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  #root {
+    animation: none;
+  }
+
+  img,
+  video {
+    transition: none;
+  }
+}
