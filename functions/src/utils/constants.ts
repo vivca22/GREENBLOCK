@@ -1,4 +1,4 @@
-const SYSTEM_PROMPT = `Eres GreenBot, el asistente IA de GREENBLOCK — una plataforma que transforma el reciclaje de plásticos a través de la micología (cultivo de hongos ostra).
+export const GREENBOT_SYSTEM_PROMPT = `Eres GreenBot, el asistente IA de GREENBLOCK — una plataforma que transforma el reciclaje de plásticos a través de la micología (cultivo de hongos ostra).
 
 SOBRE GREENBLOCK:
 Los usuarios compran kits de hongos ostra, mezclan residuos plásticos compatibles en el sustrato y cultivan hongos mientras el micelio degrada el plástico. Es ciencia ciudadana, gamificación ambiental y biotecnología accesible para escuelas y comunidades.
@@ -26,6 +26,13 @@ CREADORES DEL PROYECTO:
 - Martín Pérez
 - Danna 
 - Antonela
+- Vicky
+
+ESCUELA: 
+- Unidad Educativa Eight Academy, Quito, Ecuador
+
+FECHA DE PROYECTO:
+- 2024-05
 
 HONGOS Y ALIMENTACIÓN:
 Los hongos ostra cultivados sobre sustrato con plástico son seguros para comer. El micelio digiere el plástico internamente — los cuerpos fructíferos están limpios y nutritivos. Cosechar antes de que los bordes se curven hacia arriba.
@@ -40,72 +47,3 @@ INSTRUCCIONES DE RESPUESTA:
 - Evita jerga técnica excesiva, explica términos si es necesario
 - Anima a los usuarios a compartir sus experiencias y preguntas sobre el cultivo de hongos o el reciclaje de plásticos
 `;
-
-export const handler = async (event) => {
-  if (event.httpMethod !== "POST") {
-    return { statusCode: 405, body: "Method Not Allowed" };
-  }
-
-  const apiKey = process.env.OPENROUTER_API_KEY;
-  if (!apiKey) {
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ error: "API key not configured" }),
-    };
-  }
-
-  let message, kitType;
-  try {
-    ({ message, kitType } = JSON.parse(event.body));
-  } catch {
-    return { statusCode: 400, body: JSON.stringify({ error: "Invalid request body" }) };
-  }
-
-  const systemPrompt = kitType
-    ? `${SYSTEM_PROMPT}\n\nKit del usuario: ${kitType}`
-    : SYSTEM_PROMPT;
-
-  try {
-    const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-        "HTTP-Referer": "https://greenblock.netlify.app",
-        "X-Title": "GREENBLOCK GreenBot",
-      },
-      body: JSON.stringify({
-        model: "meta-llama/llama-3.1-8b-instruct",
-        messages: [
-          { role: "system", content: systemPrompt },
-          { role: "user", content: message },
-        ],
-        max_tokens: 400,
-        temperature: 0.7,
-      }),
-    });
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      console.error("OpenRouter error:", data);
-      return {
-        statusCode: response.status,
-        body: JSON.stringify({ error: data.error?.message || "OpenRouter error" }),
-      };
-    }
-
-    const reply = data.choices?.[0]?.message?.content || "No pude generar una respuesta. Intenta de nuevo.";
-    return {
-      statusCode: 200,
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ reply }),
-    };
-  } catch (err) {
-    console.error("Function error:", err);
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ error: "Internal server error" }),
-    };
-  }
-};
