@@ -41,3 +41,7 @@ export {upgradeAvatar} from "./avatar/upgradeAvatar";
 // Referrals functions
 export {generateReferralCode} from "./referrals/generateReferralCode";
 export {applyReferralCode} from "./referrals/applyReferralCode";
+
+// Recycling functions
+export {registerRecyclingDelivery} from "./recycling/registerDelivery";
+export {getRecyclingHistory} from "./recycling/getRecyclingHistory";

@@ -3,16 +3,16 @@ import { Link, useLocation } from "react-router";
 import { Menu, X, BookOpen, ShoppingBag, Sprout, LayoutDashboard, LogIn, UserPlus } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import { useGame } from "../context/GameContext";
+import { useIsAdmin } from "../../hooks/useIsAdmin";
 import { GreenPointsBadge } from "./GreenPointsBadge";
 import { Skeleton } from "./ui/skeleton";
 import { greenBlockLogoBrowser } from "../../assets";
-
-const ADMIN_EMAIL = "admin@ecofungi.com";
 
 export function Navbar() {
   const location = useLocation();
   const { user, logout, loading } = useAuth();
   const { points } = useGame();
+  const isAdmin = useIsAdmin();
   const [menuOpen, setMenuOpen] = useState(false);
 
   const publicLinks = [
@@ -65,7 +65,7 @@ export function Navbar() {
             </Link>
           ))}
 
-          {user?.email === ADMIN_EMAIL && (
+          {isAdmin && (
             <Link
               to="/admin"
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-sm transition-colors hover:opacity-80"
@@ -179,7 +179,7 @@ export function Navbar() {
                 </Link>
               ))}
 
-              {user?.email === ADMIN_EMAIL && (
+              {isAdmin && (
                 <Link
                   to="/admin"
                   onClick={() => setMenuOpen(false)}

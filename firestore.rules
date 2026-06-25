@@ -1,0 +1,80 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ── USERS ────────────────────────────────────────────────────────────────
+    // Cada usuario lee y escribe solo su propio documento.
+    match /users/{uid} {
+      allow read, write: if request.auth != null && request.auth.uid == uid;
+
+      // Subcolecciones (pointsHistory, courseProgress): solo lectura propia.
+      // Las Functions son las únicas que escriben aquí (Admin SDK omite estas reglas).
+      match /{subcollection}/{docId} {
+        allow read: if request.auth != null && request.auth.uid == uid;
+        allow write: if false;
+      }
+    }
+
+    // ── KITS / CATÁLOGO ──────────────────────────────────────────────────────
+    // Lectura pública: el catálogo es visible sin login (mejor UX).
+    // Escritura bloqueada desde el front; solo Functions actualizan stock.
+    match /kits/{kitId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // ── ÓRDENES ──────────────────────────────────────────────────────────────
+    // Cada usuario solo ve sus propias órdenes.
+    // Creación y actualización exclusivas de Functions.
+    match /orders/{orderId} {
+      allow read: if request.auth != null
+                  && resource.data.userId == request.auth.uid;
+      allow write: if false;
+    }
+
+    // ── ENTREGAS DE RECICLAJE ────────────────────────────────────────────────
+    // Solo accesibles por Functions (Admin SDK omite estas reglas).
+    // El front NUNCA lee ni escribe aquí directamente.
+    match /recyclingDeliveries/{deliveryId} {
+      allow read, write: if false;
+    }
+
+    // ── CURSOS ───────────────────────────────────────────────────────────────
+    // Lectura para usuarios autenticados.
+    match /courses/{courseId} {
+      allow read: if request.auth != null;
+      allow write: if false;
+
+      // Las preguntas con respuestas correctas NUNCA llegan al front.
+      match /questions/{questionId} {
+        allow read, write: if false;
+      }
+    }
+
+    // ── TIENDA ───────────────────────────────────────────────────────────────
+    match /shopItems/{itemId} {
+      allow read: if request.auth != null;
+      allow write: if false;
+    }
+
+    // ── REFERIDOS ────────────────────────────────────────────────────────────
+    // Lectura para validar un código al ingresarlo; escritura solo Functions.
+    match /referralCodes/{code} {
+      allow read: if request.auth != null;
+      allow write: if false;
+    }
+
+    // ── CONFIG ───────────────────────────────────────────────────────────────
+    // El front lee config/app para: check de admin (Admin.tsx) y pointsPerGram.
+    // Escritura bloqueada desde el front; solo Functions y seed script.
+    match /config/{docId} {
+      allow read: if request.auth != null;
+      allow write: if false;
+    }
+
+    // ── DENEGADO POR DEFECTO ─────────────────────────────────────────────────
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

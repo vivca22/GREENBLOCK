@@ -1,9 +1,22 @@
-import {onRequest} from "firebase-functions/https";
+import {onCall, HttpsError} from "firebase-functions/https";
+import {db} from "../utils/admin";
 
-/**
- * Obtiene el historial de transacciones de puntos verdes
- */
-export const getTransactions = onRequest(async (request, response) => {
-  // TODO: Implementar lógica de obtención de transacciones
-  response.json({message: "getTransactions - TODO"});
+interface GetTransactionsData {
+  limitNum?: number;
+}
+
+export const getTransactions = onCall(async (request) => {
+  if (!request.auth) {
+    throw new HttpsError("unauthenticated", "Debes iniciar sesión");
+  }
+
+  const {limitNum} = (request.data as GetTransactionsData) || {};
+
+  const snap = await db
+    .collection(`users/${request.auth.uid}/pointsHistory`)
+    .orderBy("createdAt", "desc")
+    .limit(limitNum || 30)
+    .get();
+
+  return snap.docs.map((d) => ({id: d.id, ...d.data()}));
 });
