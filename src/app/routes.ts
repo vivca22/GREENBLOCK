@@ -3,7 +3,11 @@ import { PublicLayout } from "./layouts/PublicLayout";
 import { Home } from "./pages/Home";
 import { Traceability } from "./pages/Traceability";
 import { RequestKit } from "./pages/RequestKit";
-import { Admin } from "./pages/Admin";
+import { AdminLayout } from "./pages/admin/AdminLayout";
+import { RecyclingSection } from "./pages/admin/components/RecyclingSection";
+import { OrdersSection } from "./pages/admin/components/OrdersSection";
+import { KitsSection } from "./pages/admin/components/KitsSection";
+import { SettingsSection } from "./pages/admin/components/SettingsSection";
 import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
 import { HowToUse } from "./pages/HowToUse";
@@ -27,5 +31,14 @@ export const router = createBrowserRouter([
     ],
   },
   { path: "/login", Component: Login },
-  { path: "/admin", Component: Admin },
+  {
+    path: "/admin",
+    Component: AdminLayout,
+    children: [
+      { path: "reciclaje", Component: RecyclingSection },
+      { path: "pedidos", Component: OrdersSection },
+      { path: "kits", Component: KitsSection },
+      { path: "configuracion", Component: SettingsSection },
+    ],
+  },
 ]);

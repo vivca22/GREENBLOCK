@@ -11,6 +11,7 @@ export interface GreenUser {
   kitType: string;
   purchaseDate: string;
   confirmed: boolean;
+  greenPoints: number;
 }
 
 interface AuthContextType {
@@ -49,6 +50,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           kitType: data.kitType || "",
           purchaseDate: data.purchaseDate || "",
           confirmed: data.confirmed || false,
+          greenPoints: data.greenPoints || 0,
         });
       } else {
         setUser(null);
@@ -76,7 +78,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const saveUserProfile = async (uid: string, data: Omit<GreenUser, "uid">) => {
     const docRef = doc(db, "users", uid);
     await setDoc(docRef, { ...data, updatedAt: serverTimestamp() }, { merge: true });
-    setUser({ uid, ...data });
+    setUser((prev) => ({ ...(prev ?? { uid, greenPoints: 0 }), uid, ...data }));
   };
 
   const logout = async () => {

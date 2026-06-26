@@ -39,8 +39,13 @@ export const registerRecyclingDelivery = onCall(async (request) => {
 
   await db.runTransaction(async (tx) => {
     const studentRef = db.doc(`users/${studentUid}`);
-    const studentSnap = await tx.get(studentRef);
+    const gameDataRef = db.doc(`gameData/${studentUid}`);
+    const [studentSnap, gameDataSnap] = await Promise.all([
+      tx.get(studentRef),
+      tx.get(gameDataRef),
+    ]);
 
+    // Update or create the user profile doc
     if (!studentSnap.exists) {
       tx.set(studentRef, {
         email: studentEmail,
@@ -53,6 +58,21 @@ export const registerRecyclingDelivery = onCall(async (request) => {
         "greenPoints": admin.firestore.FieldValue.increment(greenPointsAwarded),
         "recyclingStats.totalGrams": admin.firestore.FieldValue.increment(weightGrams),
         "recyclingStats.totalDeliveries": admin.firestore.FieldValue.increment(1),
+      });
+    }
+
+    // Update or create the game state doc (used by the UI to display points)
+    if (!gameDataSnap.exists) {
+      tx.set(gameDataRef, {
+        points: greenPointsAwarded,
+        skin: "default",
+        equippedItems: [],
+        completedLessons: [],
+        history: [],
+      });
+    } else {
+      tx.update(gameDataRef, {
+        points: admin.firestore.FieldValue.increment(greenPointsAwarded),
       });
     }
 

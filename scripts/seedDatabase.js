@@ -13,8 +13,24 @@ const db = getFirestore();
 const ADMIN_EMAIL = "jorge.perez01epn@gmail.com";
 // ──────────────────────────────────────────────
 
+async function clearCollection(collectionName) {
+  const snap = await db.collection(collectionName).get();
+  if (snap.empty) { console.log(`   ⚪ ${collectionName}: vacía`); return; }
+  const batch = db.batch();
+  snap.docs.forEach((d) => batch.delete(d.ref));
+  await batch.commit();
+  console.log(`   🗑️  ${collectionName}: ${snap.size} documentos eliminados`);
+}
+
 async function seed() {
   console.log("🌱 Iniciando seed de GREENBLOCK...\n");
+
+  // LIMPIAR COLECCIONES
+  console.log("🧹 Limpiando colecciones...");
+  await clearCollection("kits");
+  await clearCollection("shopItems");
+  await clearCollection("courses");
+  console.log();
 
   // CONFIG
   await db.doc("config/app").set({
@@ -164,9 +180,8 @@ async function seed() {
   });
   console.log(`✅ Curso: ${courseRef.id} (con 1 pregunta)\n`);
 
-  console.log("🎉 Seed completado!\n");
-  console.log("⚠️  IMPORTANTE: Cambia ADMIN_EMAIL en este script por tu email real antes de correrlo.");
-  console.log("   El email debe ser el mismo con el que haces login con Google en la app.\n");
+  console.log("🎉 Seed completado!");
+  console.log(`   Admin configurado: ${ADMIN_EMAIL}\n`);
   process.exit(0);
 }
 
