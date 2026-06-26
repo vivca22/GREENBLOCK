@@ -2,20 +2,8 @@ import { useState, useEffect, useCallback } from "react";
 import { X, Check, ChevronDown, ShoppingBag } from "lucide-react";
 import { LoadingSpinner } from "../../../components/LoadingSpinner";
 import { callGetOrders, callUpdateOrderStatus } from "../../../../lib/functions";
-
-type OrderStatus = "pending" | "confirmed" | "shipped" | "delivered" | "cancelled";
-
-interface Order {
-  id: string;
-  userId: string;
-  kitName: string;
-  quantity: number;
-  total: number;
-  status: OrderStatus;
-  shippingAddress: { fullName: string; city: string; street: string };
-  trackingCode: string | null;
-  createdAt: { seconds: number } | null;
-}
+import { parseOrders } from "../../../models/mappers/orderMappers";
+import type { Order, OrderStatus } from "../../../models/order.model";
 
 const STATUS_LABELS: Record<OrderStatus, string> = {
   pending: "Pendiente",
@@ -67,7 +55,7 @@ export function OrdersSection() {
 
   const loadOrders = useCallback(async () => {
     const res = await callGetOrders({ adminView: true, limitNum: 50 });
-    setOrders(res.data as Order[]);
+    setOrders(parseOrders(res.data));
   }, []);
 
   useEffect(() => {

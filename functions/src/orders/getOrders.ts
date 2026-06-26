@@ -36,9 +36,14 @@ export const getOrders = onCall(async (request) => {
   const snap = await db
     .collection("orders")
     .where("userId", "==", request.auth.uid)
-    .orderBy("createdAt", "desc")
     .limit(limitNum || 50)
     .get();
 
-  return snap.docs.map((d) => ({id: d.id, ...d.data()}));
+  const docs = snap.docs.map((d) => ({id: d.id, ...d.data()})) as Array<Record<string, unknown>>;
+  docs.sort((a, b) => {
+    const aTs = (a.createdAt as {seconds: number} | null)?.seconds ?? 0;
+    const bTs = (b.createdAt as {seconds: number} | null)?.seconds ?? 0;
+    return bTs - aTs;
+  });
+  return docs;
 });

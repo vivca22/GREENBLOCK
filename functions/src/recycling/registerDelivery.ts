@@ -40,10 +40,17 @@ export const registerRecyclingDelivery = onCall(async (request) => {
   await db.runTransaction(async (tx) => {
     const studentRef = db.doc(`users/${studentUid}`);
     const gameDataRef = db.doc(`gameData/${studentUid}`);
-    const [studentSnap, gameDataSnap] = await Promise.all([
+    const leaderboardRef = db.doc(`leaderboard/${studentUid}`);
+
+    const [studentSnap, gameDataSnap, leaderSnap] = await Promise.all([
       tx.get(studentRef),
       tx.get(gameDataRef),
+      tx.get(leaderboardRef),
     ]);
+
+    const studentData = studentSnap.exists ? studentSnap.data() : {};
+    const studentName: string = studentData?.name || studentEmail.split("@")[0];
+    const studentPhoto: string = studentData?.photo || "";
 
     // Update or create the user profile doc
     if (!studentSnap.exists) {
@@ -74,6 +81,26 @@ export const registerRecyclingDelivery = onCall(async (request) => {
       tx.update(gameDataRef, {
         points: admin.firestore.FieldValue.increment(greenPointsAwarded),
       });
+    }
+
+    // Maintain public leaderboard — only name, photo, totalGrams, totalDeliveries
+    if (!leaderSnap.exists) {
+      tx.set(leaderboardRef, {
+        name: studentName,
+        photo: studentPhoto,
+        totalGrams: weightGrams,
+        totalDeliveries: 1,
+        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+      });
+    } else {
+      const update: Record<string, unknown> = {
+        totalGrams: admin.firestore.FieldValue.increment(weightGrams),
+        totalDeliveries: admin.firestore.FieldValue.increment(1),
+        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+      };
+      if (studentName) update.name = studentName;
+      if (studentPhoto) update.photo = studentPhoto;
+      tx.update(leaderboardRef, update);
     }
 
     tx.set(deliveryRef, {

@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import {
-  Sprout, FlaskConical, Package, Droplets,
+  FlaskConical, Package, Droplets,
   ShoppingCart, Plus, Minus, Trash2, ArrowRight, X, Check, LayoutGrid,
 } from "lucide-react";
 import { db } from "../../lib/firebase";
 import { callCreateOrder } from "../../lib/functions";
 import { useAuth } from "../context/AuthContext";
 import { LoadingSpinner } from "../components/LoadingSpinner";
+import { MushroomIcon } from "../components/shared/MushroomIcon";
 
 type Category = "all" | "kits" | "nutrients" | "materials";
 
@@ -35,14 +36,14 @@ interface CartItem {
 type ViewMode = "catalog" | "checkout" | "success";
 
 const CATEGORY_META: Record<Exclude<Category, "all">, { Icon: React.ElementType; iconColor: string; iconBg: string }> = {
-  kits:      { Icon: Sprout,        iconColor: "#2D6A4F", iconBg: "#D8F3DC" },
+  kits:      { Icon: MushroomIcon,  iconColor: "#2D6A4F", iconBg: "#D8F3DC" },
   nutrients: { Icon: FlaskConical,  iconColor: "#1D4ED8", iconBg: "#DBEAFE" },
   materials: { Icon: Droplets,      iconColor: "#92400E", iconBg: "#FEF3C7" },
 };
 
 const CATEGORIES = [
   { key: "all" as const,       label: "Todo el catálogo", Icon: LayoutGrid },
-  { key: "kits" as const,      label: "Kits de hongos",   Icon: Sprout },
+  { key: "kits" as const,      label: "Kits de hongos",   Icon: MushroomIcon },
   { key: "nutrients" as const, label: "Nutrientes",        Icon: FlaskConical },
   { key: "materials" as const, label: "Materiales",        Icon: Package },
 ];

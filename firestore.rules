@@ -89,6 +89,13 @@ service cloud.firestore {
       allow create, delete: if false;
     }
 
+    // ── CLASIFICACIÓN DE RECICLAJE ───────────────────────────────────────────
+    // Lectura pública (solo name, photo, totalGrams). Solo Functions escriben.
+    match /leaderboard/{uid} {
+      allow read: if true;
+      allow write: if false;
+    }
+
     // ── DENEGADO POR DEFECTO ─────────────────────────────────────────────────
     match /{document=**} {
       allow read, write: if false;

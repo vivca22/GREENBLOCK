@@ -56,11 +56,7 @@ interface GameContextType {
 const GameContext = createContext<GameContextType>({} as GameContextType);
 
 const INITIAL_HISTORY: HistoryItem[] = [
-  { id: "h1", icon: "🧠", text: "Quiz completado: Micorremediación", points: 20, date: "Hoy" },
-  { id: "h2", icon: "📸", text: "Foto del hongo enviada", points: 30, date: "Ayer" },
-  { id: "h3", icon: "📦", text: "Kit comprado", points: 100, date: "Hace 3 días" },
-  { id: "h4", icon: "👥", text: "Amigo referido: maria@gmail.com", points: 50, date: "Hace 5 días" },
-  { id: "h5", icon: "📖", text: "Lección completada: El hongo y el plástico", points: 50, date: "Hace 7 días" },
+  { id: "h1", icon: "📘", text: "Registro en GreenBlock", points: 100, date: "Hoy" },
 ];
 
 const STORAGE_KEY = "greenblock_game";

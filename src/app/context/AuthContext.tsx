@@ -12,6 +12,7 @@ export interface GreenUser {
   purchaseDate: string;
   confirmed: boolean;
   greenPoints: number;
+  recyclingStats: { totalGrams: number; totalDeliveries: number };
 }
 
 interface AuthContextType {
@@ -51,6 +52,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           purchaseDate: data.purchaseDate || "",
           confirmed: data.confirmed || false,
           greenPoints: data.greenPoints || 0,
+          recyclingStats: {
+            totalGrams: data.recyclingStats?.totalGrams || 0,
+            totalDeliveries: data.recyclingStats?.totalDeliveries || 0,
+          },
         });
       } else {
         setUser(null);
@@ -78,7 +83,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const saveUserProfile = async (uid: string, data: Omit<GreenUser, "uid">) => {
     const docRef = doc(db, "users", uid);
     await setDoc(docRef, { ...data, updatedAt: serverTimestamp() }, { merge: true });
-    setUser((prev) => ({ ...(prev ?? { uid, greenPoints: 0 }), uid, ...data }));
+    setUser((prev) => ({
+      ...(prev ?? { uid, greenPoints: 0, recyclingStats: { totalGrams: 0, totalDeliveries: 0 } }),
+      uid,
+      ...data,
+    }));
   };
 
   const logout = async () => {

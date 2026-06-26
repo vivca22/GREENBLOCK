@@ -4,7 +4,7 @@ interface TimelineStepProps {
   label: string;
   date: string;
   description: string;
-  txHash: string;
+  txHash?: string;
   done: boolean;
   isLast?: boolean;
 }
@@ -33,7 +33,7 @@ export function TimelineStep({ label, date, description, txHash, done, isLast = 
           <span className="text-xs" style={{ color: "#6B7280" }}>{date}</span>
         </div>
         <p className="text-sm mt-0.5 mb-2" style={{ color: "#4B5563" }}>{description}</p>
-        <BlockchainBadge txHash={txHash} />
+        {txHash && <BlockchainBadge txHash={txHash} />}
       </div>
     </div>
   );

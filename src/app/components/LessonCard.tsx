@@ -1,4 +1,4 @@
-import { Lock, CheckCircle, PlayCircle } from "lucide-react";
+import { Lock, CheckCircle, PlayCircle, Trophy } from "lucide-react";
 
 type ModuleStatus = "completed" | "available" | "locked";
 
@@ -12,10 +12,11 @@ interface LessonCardProps {
   points: number;
   color: string;
   imagePlaceholder: string;
+  claimed?: boolean;
   onStart: (id: string) => void;
 }
 
-export function LessonCard({ id, title, description, status, lessonCount, hasQuiz, points, color, imagePlaceholder, onStart }: LessonCardProps) {
+export function LessonCard({ id, title, description, status, lessonCount, hasQuiz, points, color, imagePlaceholder, claimed, onStart }: LessonCardProps) {
   return (
     <div
       className="rounded-2xl overflow-hidden flex flex-col"
@@ -27,9 +28,17 @@ export function LessonCard({ id, title, description, status, lessonCount, hasQui
     >
       {/* Image placeholder */}
       <div
-        className="h-32 flex items-center justify-center"
+        className="h-32 flex items-center justify-center relative"
         style={{ backgroundColor: `${color}cc`, borderBottom: "1px solid rgba(0,0,0,0.06)" }}
       >
+        {status === "completed" && (
+          <span
+            className="absolute top-2 right-2 inline-flex items-center gap-1 text-[11px] px-2 py-1 rounded-full"
+            style={{ backgroundColor: "#2D6A4F", color: "white", fontWeight: 800 }}
+          >
+            <Trophy size={12} /> Completado
+          </span>
+        )}
         <div className="text-center">
           <div className="text-3xl mb-1">🌿</div>
           <p className="text-xs px-3" style={{ color: "rgba(0,0,0,0.4)", fontFamily: "Nunito, sans-serif" }}>{imagePlaceholder}</p>
@@ -62,7 +71,14 @@ export function LessonCard({ id, title, description, status, lessonCount, hasQui
 
         <div className="flex items-center justify-between">
           <p className="text-xs" style={{ color: "#6B7280", fontFamily: "Nunito, sans-serif" }}>
-            {lessonCount} lecciones · {hasQuiz ? "1 quiz · " : ""}<strong style={{ color: "#2D6A4F" }}>+{points} pts</strong>
+            {lessonCount} lecciones · {hasQuiz ? "1 quiz · " : ""}
+            {claimed ? (
+              <span style={{ backgroundColor: "#F3F4F6", color: "#9CA3AF", padding: "1px 7px", borderRadius: "999px", fontWeight: 700 }}>
+                ✓ Puntos reclamados
+              </span>
+            ) : (
+              <strong style={{ color: "#2D6A4F" }}>+{points} pts</strong>
+            )}
           </p>
           {status !== "locked" && (
             <button

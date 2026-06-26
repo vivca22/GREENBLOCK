@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router";
-import { Menu, X, BookOpen, ShoppingBag, Sprout, LayoutDashboard, LogIn, UserPlus } from "lucide-react";
+import { Menu, X, BookOpen, ShoppingBag, LayoutDashboard, LogIn, UserPlus } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import { useGame } from "../context/GameContext";
 import { useIsAdmin } from "../../hooks/useIsAdmin";
 import { GreenPointsBadge } from "./GreenPointsBadge";
 import { Skeleton } from "./ui/skeleton";
+import { MushroomIcon } from "./shared/MushroomIcon";
 import { greenBlockLogoBrowser } from "../../assets";
 
 export function Navbar() {
@@ -16,17 +17,17 @@ export function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const publicLinks = [
-    { to: "/trazabilidad", label: "Verificar", icon: null },
     { to: "/request", label: "Pedir Kit", icon: null },
   ];
 
   const authLinks = user
     ? [
-        { to: "/mi-hongo", label: "Mi Hongo", icon: <Sprout size={14} /> },
-        { to: "/aprende", label: "Aprende", icon: <BookOpen size={14} /> },
-        { to: "/tienda", label: "Tienda", icon: <ShoppingBag size={14} /> },
-        { to: "/como-usar", label: "Cómo usar", icon: null },
-      ]
+      { to: "/trazabilidad", label: "Verificar", icon: null },
+      { to: "/mi-hongo", label: "Mi Hongo", icon: <MushroomIcon size={14} /> },
+      { to: "/aprende", label: "Aprende", icon: <BookOpen size={14} /> },
+      { to: "/tienda", label: "Tienda", icon: <ShoppingBag size={14} /> },
+      { to: "/como-usar", label: "Cómo usar", icon: null },
+    ]
     : [];
 
   const allLinks = [...publicLinks, ...authLinks];

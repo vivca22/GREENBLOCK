@@ -1,11 +1,11 @@
 import { useState, useEffect, useCallback, useRef } from "react";
-import { doc, getDoc, collection, getDocs, orderBy, query } from "firebase/firestore";
+import { doc, getDoc, collection, getDocs } from "firebase/firestore";
 import { Recycle, Search, ChevronDown, X } from "lucide-react";
 import { LoadingSpinner } from "../../../components/LoadingSpinner";
 import { db } from "../../../../lib/firebase";
 import { callRegisterRecyclingDelivery, callGetRecyclingHistory } from "../../../../lib/functions";
-
-type PlasticType = "PET" | "HDPE" | "LDPE" | "PP" | "mixed";
+import type { PlasticType, RecyclingDelivery } from "../../../models/recycling.model";
+import { parseRecyclingDeliveries } from "../../../models/mappers/recyclingMappers";
 
 interface AppUser {
   uid: string;
@@ -14,14 +14,6 @@ interface AppUser {
   greenPoints: number;
 }
 
-interface RecyclingDelivery {
-  id: string;
-  studentEmail: string;
-  weightGrams: number;
-  plasticType: PlasticType;
-  greenPointsAwarded: number;
-  registeredAt: { seconds: number } | null;
-}
 
 const PLASTIC_OPTIONS: PlasticType[] = ["PET", "HDPE", "LDPE", "PP", "mixed"];
 
@@ -244,7 +236,7 @@ export function RecyclingSection() {
 
   const loadDeliveries = useCallback(async () => {
     const res = await callGetRecyclingHistory({ limitNum: 50 });
-    setDeliveries(res.data as RecyclingDelivery[]);
+    setDeliveries(parseRecyclingDeliveries(res.data as Record<string, unknown>[]));
   }, []);
 
   useEffect(() => {
@@ -252,25 +244,16 @@ export function RecyclingSection() {
       getDoc(doc(db, "config/app")).then((snap) => {
         if (snap.exists()) setPointsPerGram(snap.data().pointsPerGram || 10);
       }),
-      getDocs(query(collection(db, "users"), orderBy("name"))).then((snap) => {
-        setUsers(
-          snap.docs.map((d) => ({
+      getDocs(collection(db, "users")).then((snap) => {
+        const loaded = snap.docs
+          .map((d) => ({
             uid: d.id,
             email: d.data().email || "",
             name: d.data().name || "",
             greenPoints: d.data().greenPoints || 0,
           }))
-        );
-      }).catch(() => {
-        // fallback: load without ordering if index missing
-        getDocs(collection(db, "users")).then((snap) => {
-          setUsers(snap.docs.map((d) => ({
-            uid: d.id,
-            email: d.data().email || "",
-            name: d.data().name || "",
-            greenPoints: d.data().greenPoints || 0,
-          })));
-        });
+          .sort((a, b) => (a.name || a.email).localeCompare(b.name || b.email, "es", { sensitivity: "base" }));
+        setUsers(loaded);
       }),
       loadDeliveries(),
     ]).finally(() => setDataLoading(false));
